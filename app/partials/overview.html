@@ -1,0 +1,27 @@
+<div id="overview">
+	<div class="statusbar"> 
+		<div class="col-md-1"></div>
+		<div class="col-md-8">
+			<h1 class="statustext" id="numberOfGuests"> My Dinner: {{numberOfGuests}} People</h1></div>
+		<div class="col-md-1" id="back1"><div class="toppad"><a href="#/search" class="btn btn-warning">Go back and edit dinner</a></div></div>
+	</div>
+		
+		
+	<div id="menuview"> 
+		<div id="menuviewinner">
+			<div ng-repeat="dish in Menu">
+ 				<div class="col-md-4 dishcontpad">
+ 					<img class="sImg" ng-src="{{dish.ImageURL}}">
+ 						<div class="sName">{{dish.Title}}</div>
+ 						<h1 class="menuviewitem">{{dish.Price*numberOfGuests}} SEK</h1>
+ 				</div>
+ 			</div>
+		</div>
+	</div>
+		
+		
+	<div id="totPrice">
+		<h1 class="totallabel">Total:</h1><h1 class="totalcost" id="totPrice"> {{totalPrice*numberOfGuests}} SEK</h1>
+	</div>
+		<div class="printbtncon" id="goToPrep"><a href="#/prep" class="btn btn-warning">Print Full Recipe</a></div>
+</div>	

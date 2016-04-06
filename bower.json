@@ -1,0 +1,23 @@
+{
+  "name": "tweetmap",
+  "homepage": "https://github.com/hertzan/Intprog_projekt",
+  "authors": [
+    "hertzan <hertz.marcus@gmail.com>"
+  ],
+  "description": "tweets on a map",
+  "main": "index.html",
+  "keywords": [
+    "twitter",
+    "google",
+    "map"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
