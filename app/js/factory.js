@@ -3,7 +3,7 @@
 // dependency on any service you need. Angular will insure that the
 // service is created first time it is needed and then just reuse it
 // the next time.
-module.factory('factory',function ($resource) {
+tweetmapApp.factory('factory',function ($resource) {
 
 	// initiate codeBird twitter library
 	var cb = new Codebird;
@@ -40,7 +40,7 @@ module.factory('factory',function ($resource) {
 					console.log(reply[0].trends);
 				}
 			},
-			true
+			true // needed for app-only authentication call
 		);
 	}
 
@@ -63,7 +63,7 @@ module.factory('factory',function ($resource) {
 					getTrendsPlace(woeid);
 				}
 			},
-			true
+			true // needed for app-only authentication call
 		);
 	
 	}

@@ -8,6 +8,10 @@ tweetmapApp.config(['$routeProvider',
       when('/home', {
         templateUrl: 'partials/home.html'
       }).
+      when('/search', {
+        templateUrl: 'partials/search.html',
+        controller: 'SearchCtrl'
+      }).
       when('/map', {
         templateUrl: 'partials/map.html',
         controller: 'MapCtrl'
