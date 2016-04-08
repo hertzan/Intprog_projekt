@@ -1,0 +1,7 @@
+module.controller('SearchCtrl', function ($scope, factory, NgMap) {
+
+
+	$scope.search = function(query) {
+		factory.getGeoSearch(query);
+	}
+});
