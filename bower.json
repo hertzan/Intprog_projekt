@@ -19,5 +19,8 @@
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "ngPlacesAutocomplete": "ng-places-autocomplete#^1.2.4"
+  }
 }

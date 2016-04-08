@@ -14,21 +14,6 @@ tweetmap.factory('tweetmap',function ($resource,$cookieStore) {
   
   var map;
 
-  this.getSelectedDish = function (type) {
-    //TODO Lab 2
-    for(key in menu) {
-      if(menu[key].Category == type) {
-        return menu[key];
-      }
-    }
-  }
-
-  this.initMap = function () {
-    map = new google.maps.Map(document.getElementById('map'), {
-      center: {lat: 59.3293235, lng: 18.0685808},
-      zoom: 12
-    });
-  }
 
 
   // ---------------------------------Lab 4 starts here!-------------------------------------

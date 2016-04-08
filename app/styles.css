@@ -1,8 +1,38 @@
-html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-      #map {
-        height: 100%;
-      }
+body {
+    background: url('/images/europemap.jpg') no-repeat center center fixed; 
+  	-webkit-background-size: cover;
+  	-moz-background-size: cover;
+  	-o-background-size: cover;
+  	background-size: cover;
+}
+.mapContainer {
+  	height: 900px;
+  	margin-right: 5px;
+}
+.start {
+	text-align: center;
+	margin: auto;
+	margin-top: 13%;
+}
+#startButton {
+	font-size: 300%;
+	text-align: center;
+	margin: auto;
+	width: 400px;
+	height: 100px;
+}
+.startInfo {
+	text-align: center;
+	margin-top: 15%;
+}
+h2 span {
+	color: white;
+	font: bold 24px/45px Helvetica, Sans-Serif;
+	letter-spacing: -1px;
+	background: rgb(0,0,0);
+	background: rgba(0,0,0,0.7);
+	padding: 10px;
+}
+h2 span.space {
+	padding: 0 5px;
+}

@@ -1,16 +1,16 @@
 
-var tweetmap = angular.module('tweetmap', ['ngRoute','ngResource']);
+var tweetmapApp = angular.module('tweetmap', ['ngRoute','ngResource','ngMap']);
 
 
-tweetmap.config(['$routeProvider',
+tweetmapApp.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
       when('/home', {
-        templateUrl: 'partials/map.html'
+        templateUrl: 'partials/home.html'
       }).
       when('/map', {
         templateUrl: 'partials/map.html',
-        controller: 'mapCtrl'
+        controller: 'MapCtrl'
       }).
       otherwise({
         redirectTo: '/home'
