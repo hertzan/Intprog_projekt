@@ -57,7 +57,11 @@ tweetmapApp.factory('factory',function ($resource) {
 					// save the trending tweets in trendsArray			
 					// empty the existing trendsArray
 
+
 					trendsArray.length = 0;					
+
+
+					trendsArray.length = 0;
 
 
 					trendsArray.length = 0;
@@ -67,7 +71,12 @@ tweetmapApp.factory('factory',function ($resource) {
 						trendsArray.push(reply[0].trends[i]);
 					}
 
+
 					//console.log("trendslist " + trendsArray);
+
+
+					//console.log(trendsArray);
+					console.log("trendslist " + trendsArray);
 
 				}
 			},
