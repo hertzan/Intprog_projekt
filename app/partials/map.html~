@@ -5,6 +5,8 @@
     component-restrictions="{country:'se'}"
     on-place-changed="placeChanged()" /> <br/>
 
-<ng-map center="[59.3293235, 18.0685808]" style="height: 100%; width: 65%; margin-left: 35%;" zoom="11"></ng-map>
+<button ng-click="showTrends()">Show trends</button>
+
+<ng-map center="[59.3293235, 18.0685808]" style="height: 100%; width: 65%; margin-left: 35%;" zoom="12"></ng-map>
 
 </div>
