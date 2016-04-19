@@ -53,7 +53,7 @@ tweetmapApp.factory('factory',function ($resource) {
 					console.log("error : ");
 					console.log(reply);
 		        	} else {
-					// save the trending tweets in trendsArray					
+					// save the trending tweets in trendsArray			
 					for(var i=0; i< reply[0].trends.length;i++){
 						trendsArray.push(reply[0].trends[i]);
 					}
