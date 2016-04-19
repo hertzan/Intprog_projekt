@@ -36,10 +36,6 @@ tweetmapApp.factory('factory',function ($resource) {
 		});	
 	}
 
-	this.getTrendsArray = function() {
-		return trendsArray();
-	}
-	
 	// sets the current latitude and longitude coordinates
 	this.setLatLong = function(lat, long){
 		latitude = lat;
@@ -58,10 +54,9 @@ tweetmapApp.factory('factory',function ($resource) {
 					console.log("error : ");
 					console.log(reply);
 		        	} else {
+					// save the trending tweets in trendsArray			
 					// empty the existing trendsArray
-					while(trendsArray.length > 0) {
-   						trendsArray.pop();
-					}
+					trendsArray.length = 0;					
 
 					// save the new trending tweets in trendsArray					
 					for(var i=0; i< reply[0].trends.length;i++){

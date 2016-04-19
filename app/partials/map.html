@@ -2,10 +2,9 @@
 
     <input id="inputBox" places-auto-complete size = 80
         ng-model="MapCtrl.address"
-        component-restrictions="{country:'se'}"
         on-place-changed="placeChanged()" /> <br/>
 
-    <ng-map center="[59.3293235, 18.0685808]" style="height: 100%; width: 65%; margin-left: 35%;" zoom="11"></ng-map>
+    <ng-map center="[59.3293235, 18.0685808]" style="height: 100%; width: 65%; margin-left: 35%;" zoom="11" on-idle="onIdle()"></ng-map>
 
     <div class="list-group" id="tweetList">
         <div ng-repeat="tweet in foundTweets">

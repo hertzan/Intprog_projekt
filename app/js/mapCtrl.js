@@ -8,16 +8,34 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory,NgMap) {
 	// sets the current place in the map and in factory
 	$scope.placeChanged = function() {
 		myMap.place = this.getPlace();
-		bounds =  myMap.map.getBounds();
-		
-		var lat = myMap.place.geometry.location.lat();
-		var long = myMap.place.geometry.location.lng();
+		updatePlace();
 
-		factory.setLatLong(lat, long);
-		console.log('location','lat:', lat,'lng:' ,long);
 		myMap.map.setCenter(myMap.place.geometry.location);
+		updateTrends();		
+	}
+
+	// updates information about the current place
+	function updatePlace(){
+
+		bounds =  myMap.map.getBounds();
+		center = myMap.map.getCenter();
+
+		var lat = center.lat();
+		var long = center.lng();
+		factory.setLatLong(lat, long);
+	}
+
+	// updates the trends list
+	function updateTrends(){
 		factory.getTrendsClosest();
 		$scope.foundTweets = factory.getTrendsArray();
+	}
+
+	// triggers when the map is idle, i.e no movement in either
+	// place nor zoom
+	$scope.onIdle = function() {
+		console.log("triggered on idle");
+
 	}
 
 	NgMap.getMap().then(function(map) {
