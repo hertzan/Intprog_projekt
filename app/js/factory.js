@@ -56,14 +56,12 @@ tweetmapApp.factory('factory',function ($resource) {
 		        	} else {
 					// save the trending tweets in trendsArray			
 					// empty the existing trendsArray
-					while(trendsArray.length > 0) {
-   						trendsArray.pop();
-					}
+					trendsArray.length = 0;
 					// save the new trending tweets in trendsArray					
 					for(var i=0; i< reply[0].trends.length;i++){
 						trendsArray.push(reply[0].trends[i]);
 					}
-					console.log(trendsArray);
+					console.log("trendslist " + trendsArray);
 				}
 			},
 			true // needed for app-only authentication call
