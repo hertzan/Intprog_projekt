@@ -15,11 +15,19 @@ tweetmapApp.factory('factory',function ($resource) {
 	var latitude = 59.3293235;
 	var longitude = 18.0685808;
 
+	var tweetArray = new Array();
+
+
 	var trendsArray = new Array();
 
 	this.getTrendsArray = function() {
 		return trendsArray;
 	}
+
+	this.getTweetArray = function(){
+		return tweetArray;
+	}
+
 
 
 	// get the authenticating bearer token, not needed at the moment
@@ -42,6 +50,31 @@ tweetmapApp.factory('factory',function ($resource) {
 		longitude = long;
 	}
 
+	this.getSearchTweets = function () {
+		var params = {q:"#", geocode:'"'+latitude+', '+longitude+', 10km"'};
+		cb.__call(
+			"search_tweets",
+			params,
+			function (reply) {
+		        	if (reply === undefined) {
+					console.log("error : ");
+					console.log(reply);
+		        	} else {
+					// empty of all current tweets in the array
+					tweetArray.length = 0;
+
+					for(var i = 0; i < reply.statuses.length;i++){
+						tweetArray.push(reply.statuses[i].text)
+					}
+				}
+			},
+			true // needed for app-only authentication call
+		);
+	}
+
+
+
+// ==================================================================================================================================
 
 	// gets trending tweets from a place, based on its yahoo Where On Earth ID.
 	// saves the trends in an array for later access in map and potential list
@@ -54,29 +87,15 @@ tweetmapApp.factory('factory',function ($resource) {
 					console.log("error : ");
 					console.log(reply);
 		        	} else {
-					// save the trending tweets in trendsArray			
 					// empty the existing trendsArray
-
-
 					trendsArray.length = 0;					
-
-
-					trendsArray.length = 0;
-
-
-					trendsArray.length = 0;
 
 					// save the new trending tweets in trendsArray					
 					for(var i=0; i< reply[0].trends.length;i++){
 						trendsArray.push(reply[0].trends[i]);
 					}
 
-
 					//console.log("trendslist " + trendsArray);
-
-
-					//console.log(trendsArray);
-					console.log("trendslist " + trendsArray);
 
 				}
 			},

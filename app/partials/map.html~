@@ -4,11 +4,18 @@
         ng-model="MapCtrl.address"
         on-place-changed="placeChanged()" /> <br/>
 
-    <ng-map center="[59.3293235, 18.0685808]" style="height: 100%; width: 65%; margin-left: 35%;" zoom="11"></ng-map>
+	<ng-map center="[59.3293235, 18.0685808]" style="height: 100%; width: 65%; margin-left: 35%;" zoom="11" on-idle="onIdle()">
+		<custom-marker ng-repeat="tweet in tweetsWithPos"
+		position="[59.3293235, 18.0685808]">
+		<div>
+			{{tweet.text}}
+     		</div>
+    		</custom-marker>
+    	</ng-map>
 
     <div class="list-group" id="tweetList">
         <div ng-repeat="tweet in foundTweets">
-            <a href="{{tweet.url}}" target="_blank" class="list-group-item">{{tweet.name}}</a>
+            <a href="{{tweet.url}}" target="_blank" class="list-group-item">{{tweet.name}} and {{tweet.tweet_volume}}</a>
         </div>
     </div>
 </div>
