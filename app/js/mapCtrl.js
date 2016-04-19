@@ -28,6 +28,7 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory,NgMap) {
 	// updates the trends list
 	function updateTrends(){
 		factory.getTrendsClosest();
+
 		$scope.foundTweets = factory.getTrendsArray();
 	}
 

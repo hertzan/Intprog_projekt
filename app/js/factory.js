@@ -56,13 +56,21 @@ tweetmapApp.factory('factory',function ($resource) {
 		        	} else {
 					// save the trending tweets in trendsArray			
 					// empty the existing trendsArray
+<<<<<<< HEAD
 					trendsArray.length = 0;					
 
+=======
+					trendsArray.length = 0;
+>>>>>>> b502c77d738c921a527513a4777b92fcb71689e8
 					// save the new trending tweets in trendsArray					
 					for(var i=0; i< reply[0].trends.length;i++){
 						trendsArray.push(reply[0].trends[i]);
 					}
+<<<<<<< HEAD
 					//console.log(trendsArray);
+=======
+					console.log("trendslist " + trendsArray);
+>>>>>>> b502c77d738c921a527513a4777b92fcb71689e8
 				}
 			},
 			true // needed for app-only authentication call
