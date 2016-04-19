@@ -5,8 +5,9 @@
     component-restrictions="{country:'se'}"
     on-place-changed="placeChanged()" /> <br/>
 
-<button ng-click="showTrends()">Show trends</button>
-
-<ng-map center="[59.3293235, 18.0685808]" style="height: 100%; width: 65%; margin-left: 35%;" zoom="12"></ng-map>
-
+<ng-map center="[59.3293235, 18.0685808]" style="height: 100%; width: 65%; margin-left: 35%;" zoom="12">
+<custom-marker id="can" position="[59.3293235, 18.0685808]">
+        <b>Hi, USA</b>
+        </custom-marker>
+</ng-map>
 </div>

@@ -1,5 +1,6 @@
 tweetmapApp.controller('MapCtrl', function ($scope, factory,NgMap) {
 	var myMap = this;
+	factory.getTrendsClosest();
 
 
 	// triggers once the place has changed on search auto complete,

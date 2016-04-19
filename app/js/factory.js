@@ -31,6 +31,10 @@ tweetmapApp.factory('factory',function ($resource) {
 	        	}
 		});	
 	}
+
+	this.getTrendsArray = function() {
+		return trendsArray();
+	}
 	
 	// sets the current latitude and longitude coordinates
 	this.setLatLong = function(lat, long){
@@ -39,7 +43,8 @@ tweetmapApp.factory('factory',function ($resource) {
 	}
 
 
-	// gets trending tweets from a place, based on its yahoo Where On Earth ID
+	// gets trending tweets from a place, based on its yahoo Where On Earth ID.
+	// saves the trends in an array for later access in map and potential list
 	function getTrendsPlace (woeid) {
 		cb.__call(
 			"trends_place",
@@ -49,10 +54,16 @@ tweetmapApp.factory('factory',function ($resource) {
 					console.log("error : ");
 					console.log(reply);
 		        	} else {
-					// save the trending tweets in trendsArray					
+					// empty the existing trendsArray
+					while(trendsArray.length > 0) {
+   						trendsArray.pop();
+					}
+
+					// save the new trending tweets in trendsArray					
 					for(var i=0; i< reply[0].trends.length;i++){
 						trendsArray.push(reply[0].trends[i]);
 					}
+					console.log(trendsArray);
 				}
 			},
 			true // needed for app-only authentication call
