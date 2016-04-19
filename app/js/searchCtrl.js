@@ -1,13 +1,17 @@
 tweetmapApp.controller('SearchCtrl', function ($scope, factory) {
-
-
+	
+	$scope.status = "Loading tweets...";
+	$scope.isLoading = 1;
+	console.log("hejhe");
+	var list = new Array();
+	factory.getTweetsFromTrends("NYC");
+	
 	function updateTrends(){
-		factory.getTweetsFromTrends();
-		setTimeout(function(){
-    		//do what you need here
-		}, 2000);
-		$scope.searchTweets = factory.getTweetsFromTrendsArray();
-		console.log(factory.getTweetsFromTrendsArray());
+		factory.getTweetsFromTrends("NYC");
+		
+		list = factory.getTweetsFromTrendsArray();
+		console.log("tweetArray: " + list);
+		$scope.isLoading = 0;
 	}
 	
 	

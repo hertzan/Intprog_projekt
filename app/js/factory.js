@@ -112,9 +112,9 @@ tweetmapApp.factory('factory',function ($resource) {
 	
 	}
 
-	this.getTweetsFromTrends = function(){
+	this.getTweetsFromTrends = function(query) {
 		var params = {
-    		q: "NYC"
+    		q: query
 		};
 		cb.__call(
 			"search_tweets",
@@ -128,7 +128,7 @@ tweetmapApp.factory('factory',function ($resource) {
 					for(var i=0; i < reply.statuses.length;i++){
 						tweetsFromTrends.push(reply.statuses[i]);
 					}
-					console.log("funka då?!! " + tweetsFromTrends.name);
+					console.log("factory array: " + tweetsFromTrends);
 				}
 			},
 			true // needed for app-only authentication call

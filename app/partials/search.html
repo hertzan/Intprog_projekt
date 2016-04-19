@@ -1,6 +1,9 @@
 
+{{status}}
+<div class="mid" ng-show="isLoading==1" id="loading-image"> <img src="http://www.arabianbusiness.com/skins/ab.main/gfx/loading_spinner.gif"> </img></div>
+
 <div class="list-group" id="tweetList">
     <div ng-repeat="tweet in searchTweets">
-        <a href="#" target="_blank" class="list-group-item">{{tweet.text}}</a>
+        <li class="list-group-item">{{tweet}}</li>
     </div>
 </div>
