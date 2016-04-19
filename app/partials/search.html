@@ -1,14 +1,6 @@
 
-
-<div class="form-group">
-	<input id="tweetQuery" placeholder="Search for a place.." ng-model="query"/>
-	<button id="tweetButton" ng-click="search(query)">Find trending hashtags!</button>
-</div>
-<div class="tweetList">
-	<div ng-repeat="tweet in foundTweets">
-		<div id="tweetName">
-			<p>"Is this working"</p>
-			{{tweet.name}}
-		</div>
-	</div>
+<div class="list-group" id="tweetList">
+    <div ng-repeat="tweet in searchTweets">
+        <a href="#" target="_blank" class="list-group-item">{{tweet.text}}</a>
+    </div>
 </div>

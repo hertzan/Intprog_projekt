@@ -19,6 +19,11 @@ tweetmapApp.factory('factory',function ($resource) {
 
 
 	var trendsArray = new Array();
+	var tweetsFromTrends = new Array();
+
+	this.getTweetsFromTrendsArray = function() {
+		return tweetsFromTrends;
+	}
 
 	this.getTrendsArray = function() {
 		return trendsArray;
@@ -119,6 +124,30 @@ tweetmapApp.factory('factory',function ($resource) {
 		        	} else {
 					woeid = reply[0].woeid;
 					getTrendsPlace(woeid);
+				}
+			},
+			true // needed for app-only authentication call
+		);
+	
+	}
+
+	this.getTweetsFromTrends = function(){
+		var params = {
+    		q: "NYC"
+		};
+		cb.__call(
+			"search_tweets",
+			params,
+			function (reply) {
+		        	if (reply === undefined) {
+					console.log("error : ");
+					console.log(reply);
+		        	} else {
+					console.log(reply.statuses);
+					for(var i=0; i < reply.statuses.length;i++){
+						tweetsFromTrends.push(reply.statuses[i]);
+					}
+					console.log("funka då?!! " + tweetsFromTrends.name);
 				}
 			},
 			true // needed for app-only authentication call
