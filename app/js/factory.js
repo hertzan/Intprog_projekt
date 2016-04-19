@@ -61,13 +61,28 @@ tweetmapApp.factory('factory',function ($resource) {
 		        	} else {
 					// save the trending tweets in trendsArray			
 					// empty the existing trendsArray
+
+
+					trendsArray.length = 0;					
+
+
 					trendsArray.length = 0;
+
+
+					trendsArray.length = 0;
+
 					// save the new trending tweets in trendsArray					
 					for(var i=0; i< reply[0].trends.length;i++){
 						trendsArray.push(reply[0].trends[i]);
 					}
+
+
+					//console.log("trendslist " + trendsArray);
+
+
 					//console.log(trendsArray);
 					console.log("trendslist " + trendsArray);
+
 				}
 			},
 			true // needed for app-only authentication call
@@ -84,7 +99,7 @@ tweetmapApp.factory('factory',function ($resource) {
 			"trends_closest",
 			params,
 			function (reply) {
-		        	if (reply[0].woeid === undefined) {
+		        	if (reply[0] === undefined) {
 					console.log("error : ");
 					console.log(reply);
 		        	} else {
