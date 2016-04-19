@@ -15,6 +15,8 @@ tweetmapApp.factory('factory',function ($resource) {
 	var latitude = 59.3293235;
 	var longitude = 18.0685808;
 
+	var trendsArray = new Array();
+
 
 	// get the authenticating bearer token, not needed at the moment
 	this.getBearerToken = function () {
@@ -31,7 +33,7 @@ tweetmapApp.factory('factory',function ($resource) {
 	}
 	
 	// sets the current latitude and longitude coordinates
-	function setLatLong(lat, long){
+	this.setLatLong = function(lat, long){
 		latitude = lat;
 		longitude = long;
 	}
@@ -47,8 +49,10 @@ tweetmapApp.factory('factory',function ($resource) {
 					console.log("error : ");
 					console.log(reply);
 		        	} else {
-					console.log("Trending hashtags: ");
-					console.log(reply[0].trends);
+					// save the trending tweets in trendsArray					
+					for(var i=0; i< reply[0].trends.length;i++){
+						trendsArray.push(reply[0].trends[i]);
+					}
 				}
 			},
 			true // needed for app-only authentication call
@@ -57,7 +61,7 @@ tweetmapApp.factory('factory',function ($resource) {
 
 	// gets the closest WOEID location twitter has trending data for, based on current
 	// latitude and longitude. also passes on to getTrendsPlace, should maybe be separated
-	function getTrendsClosest(){
+	this.getTrendsClosest = function(){
 
 		var params = {lat: latitude, long: longitude};
 		var woeid;

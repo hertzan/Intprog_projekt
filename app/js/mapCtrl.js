@@ -1,5 +1,6 @@
 tweetmapApp.controller('MapCtrl', function ($scope, factory,NgMap) {
 	var myMap = this;
+	factory.getTrendsClosest();
 
 
 	// triggers once the place has changed on search auto complete,
@@ -13,8 +14,8 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory,NgMap) {
 		factory.setLatLong(lat, long);
 		console.log('location','lat:', lat,'lng:' ,long);
 		myMap.map.setCenter(myMap.place.geometry.location);
+		factory.getTrendsClosest();
 	}
-
 
 	NgMap.getMap().then(function(map) {
 		myMap.map = map;
