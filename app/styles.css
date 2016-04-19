@@ -6,8 +6,8 @@ body {
   	background-size: cover;
 }
 .mapContainer {
-  	height: 900px;
-  	margin-right: 5px;
+  	height: 640px;
+  	margin-right: 10px;
 }
 .start {
 	text-align: center;
@@ -35,4 +35,11 @@ h2 span {
 }
 h2 span.space {
 	padding: 0 5px;
+}
+#inputBox {
+	width: 25%;
+	height: 50px;
+	font: bold;
+	text-align: center;
+	margin-left: 80px;
 }
