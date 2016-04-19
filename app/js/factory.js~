@@ -17,6 +17,10 @@ tweetmapApp.factory('factory',function ($resource) {
 
 	var trendsArray = new Array();
 
+	this.getTrendsArray = function() {
+		return trendsArray;
+	}
+
 
 	// get the authenticating bearer token, not needed at the moment
 	this.getBearerToken = function () {
@@ -63,6 +67,7 @@ tweetmapApp.factory('factory',function ($resource) {
 					for(var i=0; i< reply[0].trends.length;i++){
 						trendsArray.push(reply[0].trends[i]);
 					}
+					console.log(trendsArray);
 				}
 			},
 			true // needed for app-only authentication call

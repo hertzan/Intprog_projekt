@@ -36,10 +36,6 @@ tweetmapApp.factory('factory',function ($resource) {
 		});	
 	}
 
-	this.getTrendsArray = function() {
-		return trendsArray();
-	}
-	
 	// sets the current latitude and longitude coordinates
 	this.setLatLong = function(lat, long){
 		latitude = lat;
