@@ -56,7 +56,12 @@ h2 span.space {
 	text-align: center;
 }
 
-
+.list-group {
+	margin-top: auto;
+	width: 31%;
+	margin-top: -43%;
+	margin-left: 25px;
+}
 
 
 

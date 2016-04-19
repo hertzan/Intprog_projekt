@@ -15,6 +15,7 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory,NgMap) {
 		console.log('location','lat:', lat,'lng:' ,long);
 		myMap.map.setCenter(myMap.place.geometry.location);
 		factory.getTrendsClosest();
+		$scope.foundTweets = factory.getTrendsArray();
 	}
 
 	NgMap.getMap().then(function(map) {
