@@ -57,7 +57,7 @@ tweetmapApp.factory('factory',function ($resource) {
 
 	// gets the closest WOEID location twitter has trending data for, based on current
 	// latitude and longitude. also passes on to getTrendsPlace, should maybe be separated
-	function getTrendsClosest(){
+	function getTrendingClosest(){
 
 		var params = {lat: latitude, long: longitude};
 		var woeid;
