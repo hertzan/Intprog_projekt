@@ -138,12 +138,8 @@ tweetmapApp.factory('factory',function ($resource, $q, $rootScope) {
 	}
 
 	this.getSearchTweets = function () {
-<<<<<<< HEAD
 		var deffered = $q.defer();
-		var params = {q:"#", geocode:'"'+latitude+', '+longitude+', 10km"'};
-=======
 		var params = {q:"#", geocode:'"'+latitude+', '+longitude+', 10km"',count:"100"};
->>>>>>> 27f12bdfd18c6e6286e725d655cd620d4e0f5583
 		cb.__call(
 			"search_tweets",
 			params,
@@ -151,14 +147,9 @@ tweetmapApp.factory('factory',function ($resource, $q, $rootScope) {
 		        	if (reply === undefined) {
 					console.log("error : ");
 					console.log(reply);
-<<<<<<< HEAD
 		        	}
 		        	deffered.resolve(reply);
-=======
-		        	} else {
-					commonTweetWords(reply.statuses);
-				}
->>>>>>> 27f12bdfd18c6e6286e725d655cd620d4e0f5583
+				
 			},
 			true // needed for app-only authentication call
 		);
