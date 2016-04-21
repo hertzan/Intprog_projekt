@@ -103,27 +103,37 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap, MapService) 
 	$scope.onIdle = function() {
 		updatePlace();
 		var recursiveArray = new Array();
-		recursiveGetCalls(0, recursiveArray);
+		recursiveGetCalls(0, recursiveArray, null);
 
 	}
 
 	// recursive function for making 10 independent get Search/Tweet calls, appending
 	// the total array of results
-	function recursiveGetCalls(index, array){
+	function recursiveGetCalls(index, array, max_id){
 		if(index < 10){
 			// make the API call and update trends list and map markers
-			factory.getSearchTweets("#", '"'+lat+', '+long+', 10km"',"100").then(function(foundTweets) {
+			factory.getSearchTweets("#", '"'+lat+', '+long+', 10km"',"100", max_id).then(function(foundTweets) {
 				array = array.concat(foundTweets.statuses);
-				console.log("length of array after call no: "+index);
-				console.log(array.length);
-				recursiveGetCalls(index+1, array);
-				
+
+				// search for a new max id
+				max_id = findMinID(foundTweets.statuses);
+
+				recursiveGetCalls(index+1, array, max_id);
 			});
 		}
 		if(index == 10){
 			updateTrends(array);
 			updateMap(array);
 		}
+	}
+
+	// function for finding the minimum ID (the oldest tweet) in an array of tweets
+	function findMinID(tweets){
+		var min_id = tweets[0].id;
+		for(var i=0;i<tweets.length;i++){
+			min_id = Math.min(min_id, tweets[i].id);
+		}
+		return min_id;
 	}
 
 	NgMap.getMap().then(function(map) {
