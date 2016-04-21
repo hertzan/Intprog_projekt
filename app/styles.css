@@ -56,7 +56,7 @@ h2 span.space {
 	text-align: center;
 }
 
-.list-group {
+#tweetList {
 	margin-top: auto;
 	width: 31%;
 	margin-top: -43%;
@@ -64,8 +64,7 @@ h2 span.space {
 	text-align: center;
 }
 
-#tweetList {
-	margin-top: auto;
+#hashtagsList {
 	width: 40%;
 	margin-left: 30%;
 	text-align: center;

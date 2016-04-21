@@ -3,7 +3,7 @@
 // dependency on any service you need. Angular will insure that the
 // service is created first time it is needed and then just reuse it
 // the next time.
-tweetmapApp.factory('factory',function ($resource) {
+tweetmapApp.factory('factory',function ($resource, $q, $rootScope) {
 
 	// initiate codeBird twitter library
 	var cb = new Codebird;
@@ -56,6 +56,7 @@ tweetmapApp.factory('factory',function ($resource) {
 	}
 
 	this.getSearchTweets = function () {
+		var deffered = $q.defer();
 		var params = {q:"#", geocode:'"'+latitude+', '+longitude+', 10km"'};
 		cb.__call(
 			"search_tweets",
@@ -64,18 +65,14 @@ tweetmapApp.factory('factory',function ($resource) {
 		        	if (reply === undefined) {
 					console.log("error : ");
 					console.log(reply);
-		        	} else {
-					// empty of all current tweets in the array
-					tweetArray.length = 0;
-
-					for(var i = 0; i < reply.statuses.length;i++){
-						tweetArray.push(reply.statuses[i].text)
-					}
-				}
+		        	}
+		        	deffered.resolve(reply);
 			},
 			true // needed for app-only authentication call
 		);
+		return deffered.promise;
 	}
+
 
 
 
@@ -121,10 +118,9 @@ tweetmapApp.factory('factory',function ($resource) {
 		        	if (reply[0] === undefined) {
 					console.log("error : ");
 					console.log(reply);
-		        	} else {
-					woeid = reply[0].woeid;
-					getTrendsPlace(woeid);
-				}
+		        	}
+		        	woeid = reply[0].woeid;
+		        	success: getTrendsPlace(woeid);
 			},
 			true // needed for app-only authentication call
 		);
@@ -132,8 +128,10 @@ tweetmapApp.factory('factory',function ($resource) {
 	}
 
 	this.getTweetsFromTrends = function(query) {
+		var deffered = $q.defer();
 		var params = {
-    		q: query
+    		q: query,
+    		count:20
 		};
 		cb.__call(
 			"search_tweets",
@@ -142,16 +140,12 @@ tweetmapApp.factory('factory',function ($resource) {
 		        	if (reply === undefined) {
 					console.log("error : ");
 					console.log(reply);
-		        	} else {
-					console.log(reply.statuses);
-					for(var i=0; i < reply.statuses.length;i++){
-						tweetsFromTrends.push(reply.statuses[i]);
-					}
-					console.log("factory array: " + tweetsFromTrends);
-				}
+		        	}
+		        	deffered.resolve(reply);
 			},
 			true // needed for app-only authentication call
 		);
+		return deffered.promise;
 	
 	}
 

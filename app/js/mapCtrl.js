@@ -1,9 +1,8 @@
 tweetmapApp.controller('MapCtrl', function ($scope, factory,NgMap) {
 	var myMap = this;
-	factory.getTrendsClosest();
 	var bounds;
 	var center;
-
+	var tweetNameArray = new Array();
 
 	// triggers once the place has changed on search auto complete,
 	// sets the current place in the map and in factory
@@ -28,9 +27,7 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory,NgMap) {
 
 	// updates the trends list
 	function updateTrends(){
-		factory.getSearchTweets();
-
-		console.log("updating trends!");
+		tweetNameArray.length=0;
 
 		// TODO find a way to wait for ajax end before here
 		var tweetArray = factory.getTweetArray();
@@ -48,11 +45,15 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory,NgMap) {
 			var toPush = {pos:[randLat, randLong],text:tweetArray[i]};	
 			tweetsWithPos.push(toPush);
 		}
-		console.log(tweetsWithPos);
+		console.log("tweetpos: " + tweetsWithPos);
 		$scope.tweetsWithPos = tweetsWithPos;
-		$scope.$apply();
-
-		$scope.foundTweets = factory.getTrendsArray();
+		factory.getSearchTweets().then(function(foundTweets) {
+			for (var i = 0; i < foundTweets.statuses.length; i++) {
+				console.log("foundTweets: " + foundTweets.statuses.length);
+				tweetNameArray.push(foundTweets.statuses[i]);
+			}
+			$scope.foundTweets = tweetNameArray;
+		});
 	}
 
 	// triggers when the map is idle, i.e no movement in either
