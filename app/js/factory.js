@@ -55,9 +55,95 @@ tweetmapApp.factory('factory',function ($resource, $q, $rootScope) {
 		longitude = long;
 	}
 
+	// sort an array by frequency of occurences
+	function sortByFrequency(array) {
+		var frequency = {}, value;
+		
+		// count the frequency of each word
+		for(var i = 0; i < array.length; i++){
+			value = array[i];
+    			if(value in frequency) {
+            			frequency[value]++;
+        		} else {
+           			frequency[value] = 1;
+        		}
+		}
+
+		// create uniques array to sort later
+		var uniques = [];
+    		for(value in frequency) {
+    			uniques.push(value);
+   		 }
+
+		// sort by frequency
+		uniques = uniques.sort(function(a, b) {
+	        	return frequency[b] - frequency[a];
+	    	});
+		return uniques;
+	}
+
+
+	// finds the most common words used in the tweet results
+	function commonTweetWords(tweets){
+		// empty of all current tweets in the array
+		tweetArray.length = 0;
+		
+		var tweetString = "";
+		// remove all non-geotagged tweets and add the rest to a string
+		for(var i = 0;i<tweets.length;i++){
+			if(tweets[i].coordinates == null){
+				tweets.splice(i,1);
+				i--;
+			} else {
+				tweetString += tweets[i].text;
+			}
+		}
+
+		tweetString = tweetString.toLowerCase();
+		tweetString = tweetString.split(" ");
+		var words = new Array();
+
+		// empty all but hashtags and @
+		for(var i = 0; i < tweetString.length; i++){
+			if(tweetString[i].substring(0,1) == "@" || tweetString[i].substring(0,1) == "#"){
+				words.push(tweetString[i]);
+			}
+		}
+		
+		words = sortByFrequency(words);
+		console.log(words);
+
+		var wordsWithPos = new Array();
+		for(var i = 0; i<words.length;i++){
+			var avgLat = 0
+			var avgLong = 0;
+			var numberOfMatches = 0;
+
+			for(var j = 0;j<tweets.length;j++){
+				var tweetText = tweets[j].text;
+				if(tweetText.indexOf(words[i]) != -1){
+					numberOfMatches++;
+
+					avgLat += tweets[j].coordinates.coordinates[1];
+					avgLong += tweets[j].coordinates.coordinates[0];
+				}
+			}
+			
+			avgLat = avgLat / numberOfMatches;
+			avgLong = avgLong / numberOfMatches;
+
+			var toPush = {pos:[avgLat,avgLong],word:words[i]};
+			wordsWithPos.push(toPush);
+		}
+	}
+
 	this.getSearchTweets = function () {
+<<<<<<< HEAD
 		var deffered = $q.defer();
 		var params = {q:"#", geocode:'"'+latitude+', '+longitude+', 10km"'};
+=======
+		var params = {q:"#", geocode:'"'+latitude+', '+longitude+', 10km"',count:"100"};
+>>>>>>> 27f12bdfd18c6e6286e725d655cd620d4e0f5583
 		cb.__call(
 			"search_tweets",
 			params,
@@ -65,8 +151,14 @@ tweetmapApp.factory('factory',function ($resource, $q, $rootScope) {
 		        	if (reply === undefined) {
 					console.log("error : ");
 					console.log(reply);
+<<<<<<< HEAD
 		        	}
 		        	deffered.resolve(reply);
+=======
+		        	} else {
+					commonTweetWords(reply.statuses);
+				}
+>>>>>>> 27f12bdfd18c6e6286e725d655cd620d4e0f5583
 			},
 			true // needed for app-only authentication call
 		);
