@@ -55,8 +55,76 @@ tweetmapApp.factory('factory',function ($resource) {
 		longitude = long;
 	}
 
+	// sort an array by frequency of occurences
+	function sortByFrequency(array) {
+		var frequency = {}, value;
+		
+		// count the frequency of each word
+		for(var i = 0; i < array.length; i++){
+			value = array[i];
+    			if(value in frequency) {
+            			frequency[value]++;
+        		} else {
+           			frequency[value] = 1;
+        		}
+		}
+
+		// create uniques array to sort later
+		var uniques = [];
+    		for(value in frequency) {
+    			uniques.push(value);
+   		 }
+
+		// sort by frequency
+		uniques = uniques.sort(function(a, b) {
+	        	return frequency[b] - frequency[a];
+	    	});
+		return uniques;
+	}
+
+
+	function commonTweetWords(tweets){
+		// empty of all current tweets in the array
+		tweetArray.length = 0;
+		
+		var tweetString = "";
+		// remove all non-geotagged tweets and add the rest to a string
+		for(var i = 0;i<tweets.length;i++){
+			if(tweets[i].coordinates == null){
+				tweets[i] == null;
+			} else {
+				tweetString += tweets[i].text;
+			}
+		}
+
+		tweetString = tweetString.toLowerCase();
+		words = tweetString.split(" ");
+
+		// empty all but hashtags
+		for(var i = 0; i < words.length; i++){
+			if(words[i].substring(0,1) != "#"){
+				words.splice(i, 1); // remove null element
+				i--;
+			}
+		}
+
+		words = sortByFrequency(words);
+		console.log(words);
+/*
+		var i = 0;
+		while(tweetArray.length < 15){
+
+			if(reply.statuses[i].coordinates != null){
+				var toPush = {pos:[reply.statuses[i].coordinates.coordinates[1],reply.statuses[i].coordinates.coordinates[0] ],text:reply.statuses[i].text};
+				tweetArray.push(toPush);
+							
+			}
+			i++;
+		} */
+	}
+
 	this.getSearchTweets = function () {
-		var params = {q:"#", geocode:'"'+latitude+', '+longitude+', 10km"'};
+		var params = {q:"#", geocode:'"'+latitude+', '+longitude+', 10km"',count:"100"};
 		cb.__call(
 			"search_tweets",
 			params,
@@ -65,12 +133,7 @@ tweetmapApp.factory('factory',function ($resource) {
 					console.log("error : ");
 					console.log(reply);
 		        	} else {
-					// empty of all current tweets in the array
-					tweetArray.length = 0;
-
-					for(var i = 0; i < reply.statuses.length;i++){
-						tweetArray.push(reply.statuses[i].text)
-					}
+					commonTweetWords(reply.statuses);
 				}
 			},
 			true // needed for app-only authentication call
