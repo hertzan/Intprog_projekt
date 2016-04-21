@@ -83,6 +83,7 @@ tweetmapApp.factory('factory',function ($resource) {
 	}
 
 
+	// finds the most common words used in the tweet results
 	function commonTweetWords(tweets){
 		// empty of all current tweets in the array
 		tweetArray.length = 0;
@@ -91,36 +92,49 @@ tweetmapApp.factory('factory',function ($resource) {
 		// remove all non-geotagged tweets and add the rest to a string
 		for(var i = 0;i<tweets.length;i++){
 			if(tweets[i].coordinates == null){
-				tweets[i] == null;
+				tweets.splice(i,1);
+				i--;
 			} else {
 				tweetString += tweets[i].text;
 			}
 		}
 
 		tweetString = tweetString.toLowerCase();
-		words = tweetString.split(" ");
+		tweetString = tweetString.split(" ");
+		var words = new Array();
 
-		// empty all but hashtags
-		for(var i = 0; i < words.length; i++){
-			if(words[i].substring(0,1) != "#"){
-				words.splice(i, 1); // remove null element
-				i--;
+		// empty all but hashtags and @
+		for(var i = 0; i < tweetString.length; i++){
+			if(tweetString[i].substring(0,1) == "@" || tweetString[i].substring(0,1) == "#"){
+				words.push(tweetString[i]);
 			}
 		}
-
+		
 		words = sortByFrequency(words);
 		console.log(words);
-/*
-		var i = 0;
-		while(tweetArray.length < 15){
 
-			if(reply.statuses[i].coordinates != null){
-				var toPush = {pos:[reply.statuses[i].coordinates.coordinates[1],reply.statuses[i].coordinates.coordinates[0] ],text:reply.statuses[i].text};
-				tweetArray.push(toPush);
-							
+		var wordsWithPos = new Array();
+		for(var i = 0; i<words.length;i++){
+			var avgLat = 0
+			var avgLong = 0;
+			var numberOfMatches = 0;
+
+			for(var j = 0;j<tweets.length;j++){
+				var tweetText = tweets[j].text;
+				if(tweetText.indexOf(words[i]) != -1){
+					numberOfMatches++;
+
+					avgLat += tweets[j].coordinates.coordinates[1];
+					avgLong += tweets[j].coordinates.coordinates[0];
+				}
 			}
-			i++;
-		} */
+			
+			avgLat = avgLat / numberOfMatches;
+			avgLong = avgLong / numberOfMatches;
+
+			var toPush = {pos:[avgLat,avgLong],word:words[i]};
+			wordsWithPos.push(toPush);
+		}
 	}
 
 	this.getSearchTweets = function () {
