@@ -3,20 +3,12 @@
 // dependency on any service you need. Angular will insure that the
 // service is created first time it is needed and then just reuse it
 // the next time.
-tweetmapApp.factory('factory',function ($resource) {
+tweetmapApp.factory('factory',function ($resource, $q, $rootScope) {
 
 	// initiate codeBird twitter library
 	var cb = new Codebird;
 	cb.setConsumerKey("d5Oubu1R7RDMo7XTPHV9mZ2Wd", "0mdfxc87pFUEl6TRLNgdugIckVAUxQBx0rRd585TZ92Vy2ue91");
 	cb.setBearerToken("AAAAAAAAAAAAAAAAAAAAADaCuQAAAAAACtY1FqEArZxMhbxMZog97YStjAc%3DB7FK42VBTIZzRGT5HzSX8lBwdCSU4xjjYhBjgtgYbkV88RcD1c");
-
-
-	// set Stockholm as first place on the map
-	var latitude = 59.3293235;
-	var longitude = 18.0685808;
-
-	var tweetArray = new Array();
-
 
 	var trendsArray = new Array();
 	var tweetsFromTrends = new Array();
@@ -28,12 +20,6 @@ tweetmapApp.factory('factory',function ($resource) {
 	this.getTrendsArray = function() {
 		return trendsArray;
 	}
-
-	this.getTweetArray = function(){
-		return tweetArray;
-	}
-
-
 
 	// get the authenticating bearer token, not needed at the moment
 	this.getBearerToken = function () {
@@ -49,14 +35,8 @@ tweetmapApp.factory('factory',function ($resource) {
 		});	
 	}
 
-	// sets the current latitude and longitude coordinates
-	this.setLatLong = function(lat, long){
-		latitude = lat;
-		longitude = long;
-	}
-
 	// sort an array by frequency of occurences
-	function sortByFrequency(array) {
+	this.sortByFrequency = function(array) {
 		var frequency = {}, value;
 		
 		// count the frequency of each word
@@ -85,74 +65,13 @@ tweetmapApp.factory('factory',function ($resource) {
 
 	// finds the most common words used in the tweet results
 	function commonTweetWords(tweets){
-		// empty of all current tweets in the array
-		tweetArray.length = 0;
-		
-		var tweetString = "";
-		// remove all non-geotagged tweets and add the rest to a string
-		for(var i = 0;i<tweets.length;i++){
-			if(tweets[i].coordinates == null){
-				tweets.splice(i,1);
-				i--;
-			} else {
-				tweetString += tweets[i].text;
-			}
-		}
 
-		tweetString = tweetString.toLowerCase();
-		tweetString = tweetString.split(" ");
-		var words = new Array();
-
-		// empty all but hashtags and @
-		for(var i = 0; i < tweetString.length; i++){
-			if(tweetString[i].substring(0,1) == "@" || tweetString[i].substring(0,1) == "#"){
-				words.push(tweetString[i]);
-			}
-		}
-		
-		words = sortByFrequency(words);
-		console.log(words);
-
-		var wordsWithPos = new Array();
-		for(var i = 0; i<words.length;i++){
-			var avgLat = 0
-			var avgLong = 0;
-			var numberOfMatches = 0;
-
-			for(var j = 0;j<tweets.length;j++){
-				var tweetText = tweets[j].text;
-				if(tweetText.indexOf(words[i]) != -1){
-					numberOfMatches++;
-
-					avgLat += tweets[j].coordinates.coordinates[1];
-					avgLong += tweets[j].coordinates.coordinates[0];
-				}
-			}
-			
-			avgLat = avgLat / numberOfMatches;
-			avgLong = avgLong / numberOfMatches;
-
-			var toPush = {pos:[avgLat,avgLong],word:words[i]};
-			wordsWithPos.push(toPush);
-		}
-
-		console.log(wordsWithPos);
-
-/*
-		var i = 0;
-		while(tweetArray.length < 15){
-
-			if(reply.statuses[i].coordinates != null){
-				var toPush = {pos:[reply.statuses[i].coordinates.coordinates[1],reply.statuses[i].coordinates.coordinates[0] ],text:reply.statuses[i].text};
-				tweetArray.push(toPush);
-							
-			}
-			i++;
-		} */
 	}
 
-	this.getSearchTweets = function () {
-		var params = {q:"#", geocode:'"'+latitude+', '+longitude+', 10km"',count:"100"};
+	this.getSearchTweets = function (query, geocode, count) {
+		var deffered = $q.defer();
+		//var params = {q:"#", geocode:'"'+latitude+', '+longitude+', 10km"',count:"100"};
+		var params = {q:query, geocode:geocode,count:count};
 		cb.__call(
 			"search_tweets",
 			params,
@@ -160,13 +79,15 @@ tweetmapApp.factory('factory',function ($resource) {
 		        	if (reply === undefined) {
 					console.log("error : ");
 					console.log(reply);
-		        	} else {
-					commonTweetWords(reply.statuses);
-				}
+		        	}
+		        	deffered.resolve(reply);
+				
 			},
 			true // needed for app-only authentication call
 		);
+		return deffered.promise;
 	}
+
 
 
 
@@ -212,10 +133,9 @@ tweetmapApp.factory('factory',function ($resource) {
 		        	if (reply[0] === undefined) {
 					console.log("error : ");
 					console.log(reply);
-		        	} else {
-					woeid = reply[0].woeid;
-					getTrendsPlace(woeid);
-				}
+		        	}
+		        	woeid = reply[0].woeid;
+		        	success: getTrendsPlace(woeid);
 			},
 			true // needed for app-only authentication call
 		);
@@ -223,8 +143,10 @@ tweetmapApp.factory('factory',function ($resource) {
 	}
 
 	this.getTweetsFromTrends = function(query) {
+		var deffered = $q.defer();
 		var params = {
-    		q: query
+    		q: query,
+    		count:20
 		};
 		cb.__call(
 			"search_tweets",
@@ -233,16 +155,12 @@ tweetmapApp.factory('factory',function ($resource) {
 		        	if (reply === undefined) {
 					console.log("error : ");
 					console.log(reply);
-		        	} else {
-					console.log(reply.statuses);
-					for(var i=0; i < reply.statuses.length;i++){
-						tweetsFromTrends.push(reply.statuses[i]);
-					}
-					console.log("factory array: " + tweetsFromTrends);
-				}
+		        	}
+		        	deffered.resolve(reply);
 			},
 			true // needed for app-only authentication call
 		);
+		return deffered.promise;
 	
 	}
 

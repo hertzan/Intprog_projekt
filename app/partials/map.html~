@@ -14,8 +14,8 @@
     	</ng-map>
 
     <div class="list-group" id="tweetList">
-        <div ng-repeat="tweet in foundTweets">
-            <a href="{{tweet.url}}" target="_blank" class="list-group-item">{{tweet.name}} and {{tweet.tweet_volume}}</a>
+        <div ng-repeat="tweet in foundTweets track by $index">
+            <li href="#/search" class="list-group-item">{{tweet.user.name}}, #{{tweet.entities.hashtags[0].text}}</li>
         </div>
     </div>
 </div>
