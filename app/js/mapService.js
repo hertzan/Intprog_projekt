@@ -2,16 +2,12 @@ tweetmapApp.factory('MapService', function($resource, $q, $rootScope) {
 
 	var savedData = {}
 
-	function set(data) {
+	this.set = function(data) {
 		savedData = data;
  	}
 
- 	function get() {
+ 	this.get = function() {
   		return savedData;
  	}
-
- 	return {
-  		set: set,
-  		get: get
- 	}
+ 	return this;
 });

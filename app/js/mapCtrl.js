@@ -6,8 +6,8 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap, MapService) 
 	var long = 18.0685808;
 	var tweetNameArray = new Array();
 
-	function goToSearchPage(hashtag) {
-		MapService.set(hashtag);
+	$scope.goToSearchPage = function(id) {
+		factory.set($scope.foundTweets[id].entities.hashtags[0].text);
 	}
 
 	// triggers once the place has changed on search auto complete,
@@ -100,6 +100,7 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap, MapService) 
 		factory.getSearchTweets("#", '"'+lat+', '+long+', 10km"',"15").then(function(foundTweets) {
 			updateTrends(foundTweets);
 			updateMap(foundTweets.statuses);
+			console.log(foundTweets.statuses);
 		});
 	}
 
