@@ -25,20 +25,13 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory,NgMap) {
 		}
 	}
 
-	// updates the trends list on the side
-	function updateTrends(tweets){
-		tweetNameArray.length=0;
 
-		for (var i = 0; i < tweets.statuses.length; i++) {
-			tweetNameArray.push(tweets.statuses[i]);
-		}
-		$scope.foundTweets = tweetNameArray;
-		
-	}
 
-	// updates the map with tweets to show as custom markers
-	function updateMap(tweets){
+	// returns an array of the 20 most common hashtags from an array of full tweet texts.
+	// also removes any tweets that aren't geotagged
+	function getHashtags(tweets){
 		var tweetString = "";
+
 		// remove all non-geotagged tweets and add the rest to a string
 		for(var i = 0;i<tweets.length;i++){
 			if(tweets[i].coordinates == null){
@@ -59,8 +52,18 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory,NgMap) {
 				words.push(tweetString[i]);
 			}
 		}
-		
-		words = factory.sortByFrequency(words);
+		return factory.sortByFrequency(words).slice(0,19); // send back top 20 results
+	}
+
+	// updates the trends list on the side
+	function updateTrends(tweets){
+		var words = getHashtags(tweets);
+		$scope.foundTweets = words;		
+	}
+
+	// updates the map with tweets to show as custom markers
+	function updateMap(tweets){
+		var words = getHashtags(tweets);
 
 		// create the new array with positions for markers on the map
 		var wordsWithPos = new Array();
@@ -78,13 +81,16 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory,NgMap) {
 					avgLong += tweets[j].coordinates.coordinates[0];
 				}
 			}
-			
+
+			// find average coordinates and push to show
 			avgLat = avgLat / numberOfMatches;
 			avgLong = avgLong / numberOfMatches;
 
 			var toPush = {pos:[avgLat,avgLong],word:words[i]};
 			wordsWithPos.push(toPush);
 		}
+
+		// show on the map
 		$scope.tweetsWithPos = wordsWithPos;
 	}
 
@@ -92,11 +98,28 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory,NgMap) {
 	// place nor zoom
 	$scope.onIdle = function() {
 		updatePlace();
+		var recursiveArray = new Array();
+		recursiveGetCalls(0, recursiveArray);
 
-		factory.getSearchTweets("#", '"'+lat+', '+long+', 10km"',"15").then(function(foundTweets) {
-			updateTrends(foundTweets);
-			updateMap(foundTweets.statuses);
-		});
+	}
+
+	// recursive function for making 10 independent get Search/Tweet calls, appending
+	// the total array of results
+	function recursiveGetCalls(index, array){
+		if(index < 10){
+			// make the API call and update trends list and map markers
+			factory.getSearchTweets("#", '"'+lat+', '+long+', 10km"',"100").then(function(foundTweets) {
+				array = array.concat(foundTweets.statuses);
+				console.log("length of array after call no: "+index);
+				console.log(array.length);
+				recursiveGetCalls(index+1, array);
+				
+			});
+		}
+		if(index == 10){
+			updateTrends(array);
+			updateMap(array);
+		}
 	}
 
 	NgMap.getMap().then(function(map) {

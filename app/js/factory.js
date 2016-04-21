@@ -51,9 +51,11 @@ tweetmapApp.factory('factory',function ($resource, $q, $rootScope) {
 		return uniques;
 	}
 
+	// searches for tweets.
+	// @params: query = query to search for, geocode = lat, long and radius for search
+	// count = number of items to show per page
 	this.getSearchTweets = function (query, geocode, count) {
 		var deffered = $q.defer();
-		//var params = {q:"#", geocode:'"'+latitude+', '+longitude+', 10km"',count:"100"};
 		var params = {q:query, geocode:geocode,count:count};
 		cb.__call(
 			"search_tweets",
