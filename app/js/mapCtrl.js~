@@ -1,10 +1,14 @@
-tweetmapApp.controller('MapCtrl', function ($scope, factory,NgMap) {
+tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap, MapService) {
 	var myMap = this;
 	var bounds;
 	var center;	
 	var lat = 59.3293235;
 	var long = 18.0685808;
 	var tweetNameArray = new Array();
+
+	$scope.goToSearchPage = function(id) {
+		factory.set($scope.foundTweets[id].entities.hashtags[0].text);
+	}
 
 	// triggers once the place has changed on search auto complete,
 	// sets the current place in the map and in factory
@@ -99,11 +103,11 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory,NgMap) {
 	$scope.onIdle = function() {
 		updatePlace();
 		var recursiveArray = new Array();
-		var tweets = recursiveGetCalls(0, recursiveArray);
+		recursiveGetCalls(0, recursiveArray);
 
-		console.log(tweets.length);
 	}
 
+<<<<<<< HEAD
 	// recursive function for making 10 independent get Search/Tweet calls, appending
 	// the total array of results
 	function recursiveGetCalls(index, array){
@@ -114,14 +118,20 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory,NgMap) {
 				console.log("length of array after call no: "+index);
 				console.log(array.length);
 				recursiveGetCalls(index+1, array);
-				//updateTrends(foundTweets.statuses);
-				//updateMap(foundTweets.statuses);
 				
 			});
 		}
 		if(index == 10){
-			return array;
+			updateTrends(array);
+			updateMap(array);
 		}
+=======
+		factory.getSearchTweets("#", '"'+lat+', '+long+', 10km"',"15").then(function(foundTweets) {
+			updateTrends(foundTweets);
+			updateMap(foundTweets.statuses);
+			console.log(foundTweets.statuses);
+		});
+>>>>>>> 0f5156273e88e337198c63e29623b48fa8a8e070
 	}
 
 	NgMap.getMap().then(function(map) {

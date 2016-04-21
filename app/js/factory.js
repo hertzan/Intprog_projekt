@@ -5,6 +5,8 @@
 // the next time.
 tweetmapApp.factory('factory',function ($resource, $q, $rootScope) {
 
+
+	var savedData = {}
 	// initiate codeBird twitter library
 	var cb = new Codebird;
 	cb.setConsumerKey("d5Oubu1R7RDMo7XTPHV9mZ2Wd", "0mdfxc87pFUEl6TRLNgdugIckVAUxQBx0rRd585TZ92Vy2ue91");
@@ -56,7 +58,12 @@ tweetmapApp.factory('factory',function ($resource, $q, $rootScope) {
 	// count = number of items to show per page
 	this.getSearchTweets = function (query, geocode, count) {
 		var deffered = $q.defer();
-		var params = {q:query, geocode:geocode,count:count};
+		if(geocode == null){
+			var params = {q:query, count:count};
+		} else {
+			var params = {q:query, geocode:geocode,count:count};
+		}
+		//var params = {q:"#", geocode:'"'+latitude+', '+longitude+', 10km"',count:"100"};
 		cb.__call(
 			"search_tweets",
 			params,
@@ -72,6 +79,16 @@ tweetmapApp.factory('factory',function ($resource, $q, $rootScope) {
 		);
 		return deffered.promise;
 	}
+
+
+	this.set = function(data) {
+		savedData = data;
+		console.log("savedData: " + savedData);
+ 	}
+
+ 	this.get = function() {
+  		return savedData;
+ 	}
 
   // Angular service needs to return an object that has all the
   // methods created in it
