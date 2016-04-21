@@ -15,7 +15,7 @@
 
     <div class="list-group" id="tweetList">
         <div ng-repeat="tweet in foundTweets track by $index">
-            <li href="#/search" class="list-group-item">{{tweet.user.name}}, #{{tweet.entities.hashtags[0].text}}</li>
+            <a href="#/search" ng-click="goToSearchPage({{tweet.user.name}})" class="list-group-item">{{tweet.user.name}}, #{{tweet.entities.hashtags[0].text}}</a>
         </div>
     </div>
 </div>
