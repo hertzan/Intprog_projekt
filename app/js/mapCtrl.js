@@ -82,11 +82,7 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 
 		// empty all but hashtags and @
 		for(var i = 0; i < tweetString.length; i++){
-<<<<<<< HEAD
 			if(tweetString[i].length > 2 && !tweetString[i].endsWith(":") && (tweetString[i].startsWith("#") ||tweetString[i].startsWith("@"))){
-=======
-			if(tweetString[i].substring(0,1) == "#"){
->>>>>>> e1dc5b75670e7ad413a4833d3aebecb9187751fd
 				words.push(tweetString[i]);
 			}
 		}
@@ -100,7 +96,7 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 			console.log("updating trends:");
 			console.log(foundTweets);
 
-			$scope.trends=foundTweets[0].trends.splice;
+			$scope.trends=foundTweets[0].trends.slice(0,19);
 
 			// wait for 5 mins and update again
 			setTimeout(updateTrends, 300000);		
@@ -116,7 +112,6 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 
 		var recursiveArray = new Array();
 		//recursiveGetCalls(0, recursiveArray, null);
-
 	}
 
 	// recursive function for making 10 independent get Search/Tweet calls, appending
@@ -135,9 +130,9 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 				// do next call with updated index, array, and max_id
 				recursiveGetCalls(index+1, array, max_id);
 			});
-			if(index == 10) {
-				return array;
-			}
+		}
+		if(index == 10) {
+			return array;
 		}
 	}
 
