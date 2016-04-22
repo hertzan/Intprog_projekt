@@ -24,7 +24,7 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 	}
 
 	// updates information about the current place
-	function updatePlace(){
+	function updatePlace() {
 		if(myMap.map != undefined) {
 			bounds =  myMap.map.getBounds();
 			center = myMap.map.getCenter();
@@ -49,6 +49,20 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 		}
 	}
 
+	$scope.placeTweetOnMap = function() {
+
+	}
+
+	function plotStuff(city) {
+		lat = city.latitude;
+		long = city.longitude;
+		var plotArray = new Array();
+
+		recursiveGetCalls(5, plotArray, null);
+		$scope.tweetsWithPos = getHashtags(plotArray);
+
+	}
+
 
 
 	// returns an array of the 20 most common hashtags from an array of full tweet texts.
@@ -68,7 +82,11 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 
 		// empty all but hashtags and @
 		for(var i = 0; i < tweetString.length; i++){
+<<<<<<< HEAD
 			if(tweetString[i].length > 2 && !tweetString[i].endsWith(":") && (tweetString[i].startsWith("#") ||tweetString[i].startsWith("@"))){
+=======
+			if(tweetString[i].substring(0,1) == "#"){
+>>>>>>> e1dc5b75670e7ad413a4833d3aebecb9187751fd
 				words.push(tweetString[i]);
 			}
 		}
@@ -117,6 +135,9 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 				// do next call with updated index, array, and max_id
 				recursiveGetCalls(index+1, array, max_id);
 			});
+			if(index == 10) {
+				return array;
+			}
 		}
 	}
 
