@@ -9,8 +9,6 @@ tweetmapApp.factory('factory',function ($resource, $q, $rootScope) {
 	var cities;
 	readCities();
 
-	var bounds;
-
 	var savedHash = {}
 	var savedPos = {}
 	// initiate codeBird twitter library
@@ -29,14 +27,9 @@ tweetmapApp.factory('factory',function ($resource, $q, $rootScope) {
 		});
 	}
 
-	this.setBounds = function(mapBounds){
-		bounds = mapBounds;
-
-	}
-
-	// returns an array of all cities currently within the map bounds.
+	// returns an array of all cities within the parameter bounds.
 	// returns an empty array if no cities are within the bounds.
-	this.citiesInBounds = function(){
+	this.citiesInBounds = function(bounds){
 		if(bounds == undefined) { return new Array(); }
 		var latLng;
 		var citiesArray = new Array();
@@ -105,6 +98,25 @@ tweetmapApp.factory('factory',function ($resource, $q, $rootScope) {
 		cb.__call(
 			"search_tweets",
 			params,
+			function (reply) {
+		        	if (reply === undefined) {
+					console.log("error : ");
+					console.log(reply);
+		        	}
+		        	deffered.resolve(reply);
+				
+			},
+			true // needed for app-only authentication call
+		);
+		return deffered.promise;
+	}
+
+	// returns worldwide trends for sidebar.
+	this.getTrends = function () {
+		var deffered = $q.defer();
+		cb.__call(
+			"trends_place",
+			"id=1",
 			function (reply) {
 		        	if (reply === undefined) {
 					console.log("error : ");
