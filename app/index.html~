@@ -5,6 +5,9 @@
         <meta name="description" content="tweetmap">
         <meta name="keywords" content="ng-map,AngularJS,center">
         <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+        <meta name="twitter:widgets:theme" content="light">
+        <meta name="twitter:widgets:link-color" content="#55acee">
+        <meta name="twitter:widgets:border-color" content="#55acee">
 
         <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="styles.css">
@@ -27,6 +30,8 @@
         <script src="js/mapCtrl.js"></script>
         <script src="js/searchCtrl.js"></script>
         <script src="js/factory.js"></script>
+
+        <script id="twitter-wjs" type="text/javascript" async defer src="//platform.twitter.com/widgets.js"></script>
 
     </head>
 
