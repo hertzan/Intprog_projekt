@@ -5,6 +5,11 @@
 // the next time.
 tweetmapApp.factory('factory',function ($resource, $q, $rootScope) {
 
+	// variable used for saving JSON object of all cities and their locations
+	var cities;
+	readCities();
+
+	var bounds;
 
 	var savedHash = {}
 	var savedPos = {}
@@ -12,6 +17,37 @@ tweetmapApp.factory('factory',function ($resource, $q, $rootScope) {
 	var cb = new Codebird;
 	cb.setConsumerKey("d5Oubu1R7RDMo7XTPHV9mZ2Wd", "0mdfxc87pFUEl6TRLNgdugIckVAUxQBx0rRd585TZ92Vy2ue91");
 	cb.setBearerToken("AAAAAAAAAAAAAAAAAAAAADaCuQAAAAAACtY1FqEArZxMhbxMZog97YStjAc%3DB7FK42VBTIZzRGT5HzSX8lBwdCSU4xjjYhBjgtgYbkV88RcD1c");
+
+	// read the json file for cities names and locations
+	function readCities(){
+		$.ajax({
+			url: "\cities.json",
+			success: function (data) {
+			        cities = data;
+
+    			}
+		});
+	}
+
+	this.setBounds = function(mapBounds){
+		bounds = mapBounds;
+
+	}
+
+	// returns an array of all cities currently within the map bounds.
+	// returns an empty array if no cities are within the bounds.
+	this.citiesInBounds = function(){
+		if(bounds == undefined) { return new Array(); }
+		var latLng;
+		var citiesArray = new Array();
+		for(var i=0;i<cities.length;i++){
+			latLng = new google.maps.LatLng(cities[i].latitude, cities[i].longitude); 
+			if(bounds.contains(latLng)){
+				citiesArray.push(cities[i]);
+			}
+		}
+		return citiesArray;
+	}
 
 	// get the authenticating bearer token, not needed at the moment
 	this.getBearerToken = function () {
@@ -66,7 +102,6 @@ tweetmapApp.factory('factory',function ($resource, $q, $rootScope) {
 		} else {
 			var params = {q:query, geocode:geocode,count:count, max_id:max_id};
 		}
-
 		cb.__call(
 			"search_tweets",
 			params,
