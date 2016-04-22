@@ -1,5 +1,5 @@
 
-var tweetmapApp = angular.module('tweetmap', ['ngRoute','ngResource','ngMap']);
+var tweetmapApp = angular.module('tweetmap', ['ngRoute','ngResource','ngMap','angular.filter']);
 
 
 tweetmapApp.config(['$routeProvider',

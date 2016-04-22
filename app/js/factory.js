@@ -11,7 +11,8 @@ tweetmapApp.factory('factory',function ($resource, $q, $rootScope) {
 
 	var bounds;
 
-	var savedData = {}
+	var savedHash = {}
+	var savedPos = {}
 	// initiate codeBird twitter library
 	var cb = new Codebird;
 	cb.setConsumerKey("d5Oubu1R7RDMo7XTPHV9mZ2Wd", "0mdfxc87pFUEl6TRLNgdugIckVAUxQBx0rRd585TZ92Vy2ue91");
@@ -101,7 +102,6 @@ tweetmapApp.factory('factory',function ($resource, $q, $rootScope) {
 		} else {
 			var params = {q:query, geocode:geocode,count:count, max_id:max_id};
 		}
-
 		cb.__call(
 			"search_tweets",
 			params,
@@ -119,13 +119,21 @@ tweetmapApp.factory('factory',function ($resource, $q, $rootScope) {
 	}
 
 
-	this.set = function(data) {
-		savedData = data;
-		console.log("savedData: " + savedData);
+	this.setHashtag = function(data) {
+		savedHash = data;
+		console.log("savedHash: " + savedHash);
+ 	}
+ 	this.setPosition = function(data) {
+		savedPos = data;
+		console.log("savedPos: " + savedPos);
  	}
 
- 	this.get = function() {
-  		return savedData;
+ 	this.getHashtag = function() {
+  		return savedHash;
+ 	}
+
+ 	this.getPosition = function() {
+  		return savedPos;
  	}
 
   // Angular service needs to return an object that has all the

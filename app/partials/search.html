@@ -3,7 +3,7 @@
 <div class="mid" ng-show="isLoading==1" id="loading-image"> <img src="http://www.arabianbusiness.com/skins/ab.main/gfx/loading_spinner.gif"> </img></div>
 
 <div class="list-group" id="hashtagsList">
-    <div ng-repeat="tweet in list">
+    <div ng-repeat="tweet in list | unique: 'tweet.id' ">
         <li class="list-group-item">{{tweet.text}}</li>
     </div>
 </div>

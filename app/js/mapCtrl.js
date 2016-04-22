@@ -1,4 +1,4 @@
-tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap, MapService) {
+tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 	var myMap = this;
 	var bounds;
 	var center;	
@@ -6,8 +6,10 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap, MapService) 
 	var long = 18.0685808;
 	var tweetNameArray = new Array();
 
-	$scope.goToSearchPage = function(id) {
-		factory.set($scope.foundTweets[id].entities.hashtags[0].text);
+	$scope.goToSearchPage = function(hashtag) {
+		factory.setHashtag(hashtag.word);
+		factory.setPosition(hashtag.pos);
+		console.log("pos: " + hashtag.pos)
 	}
 
 	// triggers once the place has changed on search auto complete,
@@ -119,6 +121,8 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap, MapService) 
 		if(index < 10){
 			// make the API call and update trends list and map markers
 			factory.getSearchTweets("#", '"'+lat+', '+long+', 10km"',"100", max_id).then(function(foundTweets) {
+				console.log("foundTweets");
+				console.log(foundTweets);
 				array = array.concat(foundTweets.statuses);
 
 				// search for a new max id
