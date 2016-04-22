@@ -1,4 +1,4 @@
-tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap, MapService) {
+tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 	var myMap = this;
 	var bounds;
 	var center;	
@@ -6,8 +6,9 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap, MapService) 
 	var long = 18.0685808;
 	var tweetNameArray = new Array();
 
-	$scope.goToSearchPage = function(id) {
-		factory.set($scope.foundTweets[id].entities.hashtags[0].text);
+	$scope.goToSearchPage = function(hashtag) {
+		factory.setHashtag(hashtag.word);
+		factory.setPosition(hashtag.pos);
 	}
 
 	// triggers once the place has changed on search auto complete,

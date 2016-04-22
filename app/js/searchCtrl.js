@@ -5,10 +5,11 @@ tweetmapApp.controller('SearchCtrl', function ($scope, factory) {
 	$scope.isLoading = 1;
 	var list = new Array();
 
-	var query = factory.get();
-	console.log(query);
+	var query = factory.getHashtag();
+	var geocode = factory.getPosition() + ",20km";
+	console.log(geocode);
 
-	factory.getSearchTweets(query, null, 20).then(function(foundTweets) {
+	factory.getSearchTweets(query, geocode, 15).then(function(foundTweets) {
 		for (var i = 0; i < foundTweets.statuses.length; i++) {
 			list.push(foundTweets.statuses[i]);
 		}
@@ -19,7 +20,7 @@ tweetmapApp.controller('SearchCtrl', function ($scope, factory) {
 
 	$(window).scroll(function () {
    	if ($(window).scrollTop() >= $(document).height() - $(window).height() - 10) {
-    	factory.getSearchTweets(query, null, 20).then(function(foundTweets) {
+    	factory.getSearchTweets(query, geocode, 15).then(function(foundTweets) {
 		for (var i = 0; i < foundTweets.statuses.length; i++) {
 			list.push(foundTweets.statuses[i]);
 		}
