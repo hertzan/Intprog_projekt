@@ -14,9 +14,9 @@
     	</ng-map>
 
     <div class="list-group" id="tweetList">
-        <div ng-repeat="tweet in tweetsWithPos track by $index">
+        <div ng-repeat="tweet in tweets track by $index">
 
-            <a href="#/search" ng-click=goToSearchPage(tweet) class="list-group-item">{{tweet.word}}</a>
+            <a href="#/search" ng-click=goToSearchPage(tweet) class="list-group-item">{{tweet}}</a>
         </div>
     </div>
 </div>

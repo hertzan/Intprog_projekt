@@ -37,18 +37,12 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 
 
 	// returns an array of the 20 most common hashtags from an array of full tweet texts.
-	// also removes any tweets that aren't geotagged
 	function getHashtags(tweets){
 		var tweetString = "";
-
-		// remove all non-geotagged tweets and add the rest to a string
+	
+		// Add all tweets to a string
 		for(var i = 0;i<tweets.length;i++){
-			if(tweets[i].coordinates == null){
-				tweets.splice(i,1);
-				i--;
-			} else {
-				tweetString += tweets[i].text;
-			}
+			tweetString += tweets[i].text;
 		}
 
 		tweetString = tweetString.toLowerCase();
@@ -67,7 +61,8 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 	// updates the trends list on the side
 	function updateTrends(tweets){
 		var words = getHashtags(tweets);
-		$scope.foundTweets = words;		
+		console.log(words);
+		$scope.tweets = words;		
 	}
 
 	// updates the map with tweets to show as custom markers
@@ -111,31 +106,30 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 
 		console.log(factory.citiesInBounds());
 		var recursiveArray = new Array();
-		//recursiveGetCalls(0, recursiveArray, null);
+		recursiveGetCalls(0, recursiveArray, null);
 
 	}
 
 	// recursive function for making 10 independent get Search/Tweet calls, appending
-	// the total array of results. NOT USED AT THE MOMENT
+	// the total array of results.
 	function recursiveGetCalls(index, array, max_id){
 		if(index < 10){
 			// make the API call and update trends list and map markers
 			factory.getSearchTweets("#", '"'+lat+', '+long+', 10km"',"100", max_id).then(function(foundTweets) {
-				console.log("foundTweets");
-				console.log(foundTweets);
 				array = array.concat(foundTweets.statuses);
 
 				// search for a new max id
 				max_id = findMinID(foundTweets.statuses);
 
 				console.log("finished call no: " + index);
+
 				// do next call with updated index, array, and max_id
 				recursiveGetCalls(index+1, array, max_id);
 			});
 		}
 		if(index == 10){
 			updateTrends(array);
-			updateMap(array);
+			//updateMap(array);
 		}
 	}
 
