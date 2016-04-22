@@ -13,6 +13,7 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap, MapService) 
 	// triggers once the place has changed on search auto complete,
 	// sets the current place in the map and in factory
 	$scope.placeChanged = function() {
+		
 		myMap.place = this.getPlace();
 
 		myMap.map.setCenter(myMap.place.geometry.location);
@@ -24,8 +25,10 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap, MapService) 
 			bounds =  myMap.map.getBounds();
 			center = myMap.map.getCenter();
 
+			factory.setBounds(bounds);
 			lat = center.lat();
 			long = center.lng();
+
 		}
 	}
 
@@ -101,14 +104,17 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap, MapService) 
 	// triggers when the map is idle, i.e no movement in either
 	// place nor zoom
 	$scope.onIdle = function() {
+
 		updatePlace();
+
+		console.log(factory.citiesInBounds());
 		var recursiveArray = new Array();
-		recursiveGetCalls(0, recursiveArray, null);
+		//recursiveGetCalls(0, recursiveArray, null);
 
 	}
 
 	// recursive function for making 10 independent get Search/Tweet calls, appending
-	// the total array of results
+	// the total array of results. NOT USED AT THE MOMENT
 	function recursiveGetCalls(index, array, max_id){
 		if(index < 10){
 			// make the API call and update trends list and map markers
@@ -118,6 +124,8 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap, MapService) 
 				// search for a new max id
 				max_id = findMinID(foundTweets.statuses);
 
+				console.log("finished call no: " + index);
+				// do next call with updated index, array, and max_id
 				recursiveGetCalls(index+1, array, max_id);
 			});
 		}
