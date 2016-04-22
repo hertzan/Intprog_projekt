@@ -43,8 +43,8 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 		long = city.longitude;
 		var plotArray = new Array();
 
-		recursiveGetCalls(5, plotArray, null);
-		$scope.tweetsWithPos = getHashtags(plotArray);
+		plotArray = recursiveGetCalls(5, plotArray, null);
+		getHashtags(plotArray);
 
 	}
 
@@ -140,9 +140,10 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 				// do next call with updated index, array, and max_id
 				recursiveGetCalls(index+1, array, max_id);
 			});
+			
+			}
 			if(index == 10) {
 				return array;
-			}
 		}
 	}
 
