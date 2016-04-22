@@ -22,7 +22,7 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 	}
 
 	// updates information about the current place
-	function updatePlace(){
+	function updatePlace() {
 		if(myMap.map != undefined) {
 			bounds =  myMap.map.getBounds();
 			center = myMap.map.getCenter();
@@ -32,6 +32,20 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 			long = center.lng();
 
 		}
+	}
+
+	$scope.placeTweetOnMap = function() {
+
+	}
+
+	function plotStuff(city) {
+		lat = city.latitude;
+		long = city.longitude;
+		var plotArray = new Array();
+
+		recursiveGetCalls(5, plotArray, null);
+		$scope.tweetsWithPos = getHashtags(plotArray);
+
 	}
 
 
@@ -51,7 +65,7 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 
 		// empty all but hashtags and @
 		for(var i = 0; i < tweetString.length; i++){
-			if(tweetString[i].substring(0,1) == "@" || tweetString[i].substring(0,1) == "#"){
+			if(tweetString[i].substring(0,1) == "#"){
 				words.push(tweetString[i]);
 			}
 		}
@@ -126,10 +140,9 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 				// do next call with updated index, array, and max_id
 				recursiveGetCalls(index+1, array, max_id);
 			});
-		}
-		if(index == 10){
-			updateTrends(array);
-			//updateMap(array);
+			if(index == 10) {
+				return array;
+			}
 		}
 	}
 
