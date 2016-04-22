@@ -6,7 +6,7 @@
 			<span class='spacer'>Search by city or #hashtag.</span></h2>
 
 		<div class="start">
-			<a href="#/map" id="startButton" class="btn btn-info btn-	lg">Find Tweets</a>
+			<a href="#/map" id="startButton" class="btn btn-info btn-lg">Find Tweets</a>
 		</div>
 
 	</div>
