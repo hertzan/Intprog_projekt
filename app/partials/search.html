@@ -1,4 +1,23 @@
 
+<head>
+	<script>window.twttr = (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0],
+    t = window.twttr || {};
+  if (d.getElementById(id)) return t;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "https://platform.twitter.com/widgets.js";
+  fjs.parentNode.insertBefore(js, fjs);
+ 
+  t._e = [];
+  t.ready = function(f) {
+    t._e.push(f);
+  };
+ 
+  return t;
+}(document, "script", "twitter-wjs"));</script>
+</head>
+
 <h2 style=text-align:center;color:white; >{{status}}</h2>
 <div class="mid" ng-show="isLoading==1" id="loading-image"> <img src="http://www.arabianbusiness.com/skins/ab.main/gfx/loading_spinner.gif"> </img></div>
 
@@ -7,3 +26,9 @@
         <li class="list-group-item">{{tweet.text}}</li>
     </div>
 </div>
+<li ng-repeat="tweet in list">
+    <blockquote class="twitter-tweet tw-align-left" data-lang="en">
+        <a ng-href="https://twitter.com/{{tweet.handle}}/status/{{tweet.theTweet}}"></a>
+    </blockquote>
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</li>

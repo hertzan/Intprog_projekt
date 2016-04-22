@@ -66,7 +66,6 @@ tweetmapApp.factory('factory',function ($resource, $q, $rootScope) {
 		} else {
 			var params = {q:query, geocode:geocode,count:count, max_id:max_id};
 		}
-
 		cb.__call(
 			"search_tweets",
 			params,

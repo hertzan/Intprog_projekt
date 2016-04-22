@@ -9,6 +9,7 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 	$scope.goToSearchPage = function(hashtag) {
 		factory.setHashtag(hashtag.word);
 		factory.setPosition(hashtag.pos);
+		console.log("pos: " + hashtag.pos);
 	}
 
 	// triggers once the place has changed on search auto complete,
@@ -36,7 +37,8 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 	// also removes any tweets that aren't geotagged
 	function getHashtags(tweets){
 		var tweetString = "";
-
+		console.log("inside getHashtags");
+		console.log(tweets);
 		// remove all non-geotagged tweets and add the rest to a string
 		for(var i = 0;i<tweets.length;i++){
 			if(tweets[i].coordinates == null){
@@ -63,6 +65,7 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 	// updates the trends list on the side
 	function updateTrends(tweets){
 		var words = getHashtags(tweets);
+		console.log(words);
 		$scope.foundTweets = words;		
 	}
 
@@ -111,21 +114,13 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 	// recursive function for making 10 independent get Search/Tweet calls, appending
 	// the total array of results
 	function recursiveGetCalls(index, array, max_id){
-		if(index < 10){
 			// make the API call and update trends list and map markers
 			factory.getSearchTweets("#", '"'+lat+', '+long+', 10km"',"100", max_id).then(function(foundTweets) {
-				array = array.concat(foundTweets.statuses);
-
-				// search for a new max id
-				max_id = findMinID(foundTweets.statuses);
-
-				recursiveGetCalls(index+1, array, max_id);
+				console.log("inside getSearchTweets");
+				console.log(foundTweets.statuses);
+				updateTrends(foundTweets.statuses);
+				updateMap(foundTweets.statuses);
 			});
-		}
-		if(index == 10){
-			updateTrends(array);
-			updateMap(array);
-		}
 	}
 
 	// function for finding the minimum ID (the oldest tweet) in an array of tweets
