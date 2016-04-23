@@ -39,7 +39,7 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 					console.log("currentCities before: ");
 					console.log(citiesInBounds[i]);
 					console.log("plotting for: " + citiesInBounds[i].name);
-					$scope.tweetsWithPos = getPlotCoordinates(citiesInBounds[i]);
+					getPlotCoordinates(citiesInBounds[i]);
 				}
 			}
 			// update the current cities with those in bounds
@@ -66,26 +66,33 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 		//myMap.map.customMarkers.foo.setPosition(lat, long);
 	}
 
+	
+	var plotCoordinates = new Array();
+
 	function getPlotCoordinates(city) {
-		var plotCoordinates = new Array();
+		
 		var retreivedArray = new Array();
 		var plotlat = city.latitude;
 		var plotlong = city.longitude;
 
-		retreivedArray = recursiveGetCalls(5, plotlat, plotlong, plotCoordinates, null);
+		factory.getSearchTweets("#", '"'+plotlat+', '+plotlong+', 20km"',"15", null).then(function(foundTweets) {
+			retreivedArray = foundTweets.statuses;
 
-		for(var i=0;i<retreivedArray.length;i++) {
-			plotCoordinates.push([name[retreivedArray[i]], pos[plotlat,plotlong]]);
-			//ingen aning vad detta kommer plotta men man måste testa något hehe...
-			if(i % 2 == 0){
-				plotlat + 1;
-				plotlong - 0.5;
-			} else {
-				plotlong + 1;
-				plotlat - 0.5;
+			for(var i=0;i<retreivedArray.length;i++) {
+				plotCoordinates.push({hash:[retreivedArray[i].entities.hashtags[0]], pos:[plotlat,plotlong]});
+				//ingen aning vad detta kommer plotta men man måste testa något hehe...
+				if(i % 2 == 0){
+					plotlat + 1;
+					plotlong - 0.5;
+				} else {
+					plotlong + 1;
+					plotlat - 0.5;
+				}
 			}
-		}
-		return plotCoordinates;
+			console.log("plotCoordinates: ");
+			console.log(plotCoordinates);
+			$scope.tweetsWithPos = plotCoordinates;
+		});
 	}
 
 

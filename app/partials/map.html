@@ -6,11 +6,10 @@
 
     
 	<ng-map class="map" style:"height:100%;" center="[59.3293235, 18.0685808]" zoom="12" on-idle="onIdle()">
-		<custom-marker ng-repeat="tweet in tweetsWithPos track by $index" id="custom-marker-{{$index}}" position="tweet.pos">
-
+		<custom-marker ng-repeat="tweet in tweetsWithPos track by $index" id="custom-marker-{{$index}}" position="{{tweet.pos}}">
             <div class="Tweetbox">
                 <div class="Tweet">
-                    {{tweet.name}}
+                    {{tweet.hash[0].text}}
      		    </div>
             </div>
     	</custom-marker>
