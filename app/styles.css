@@ -6,10 +6,9 @@ body {
   	background-size: cover;
 }
 .mapContainer {
- 	//height: 700px;
 	margin-right: 10%;
 	margin-left: 10%;
-	margin-top: 5%;
+	//margin-top: 5%;
 }
 
 .start {
@@ -22,9 +21,9 @@ body {
 #startButton {
 	font-size: 25px;
 	padding: 10px;
+	padding-left:20px;
+	padding-right:20px;
 }
-
-
 
 .startInfo {
 	text-align: center;
@@ -36,22 +35,22 @@ body {
 	font-family: "Helvetica Neue", Helvetica, Sans-Serif;
 	font-size: 40px;
 	font-weight: bold;
-	letter-spacing: -1px;
 	background: rgb(0,0,0);
 	background: rgba(0,0,0,0.7);
-	padding: 10px;
+	padding: 2px;
+	line-height: 125%;
 }
 
 .startInfo .spacer {
 	color: white;
 	font-size: 30px;
-	letter-spacing: -1px;
 	background: rgb(0,0,0);
 	background: rgba(0,0,0,0.7);
-	padding: 10px;
+	padding: 2px;
 	position:relative;
-	top: 10px;
-}
+	top: 5px;
+	margin-bottom: 5%;
+}	
 
 #inputBox {
 	width: 30%;
@@ -151,7 +150,15 @@ body {
 		width: 100%;
 		clear: both;
 	}
-
+	.startInfo .jumbo {
+		width:100%;
+	}
+	.startInfo .spacer {
+		width:100%;
+	}
+	#startButton {
+		margin-top:10%;
+	}
 }
 
 
