@@ -4,15 +4,18 @@
         ng-model="MapCtrl.address"
         on-place-changed="placeChanged()" /> <br/>
 
-	<ng-map id="map" center="[59.3293235, 18.0685808]" zoom="12" on-idle="onIdle()">
-		<custom-marker ng-repeat="tweet in tweetsWithPos" position="">
+    
+	<ng-map class="map" style:"height:100%;" center="[59.3293235, 18.0685808]" zoom="12" on-idle="onIdle()">
+		<custom-marker ng-repeat="tweet in trends track by $index" id="custom-marker-{{$index}}" position="[59.3293235, 18.0685808]">
+
             <div class="Tweetbox">
                 <div class="Tweet">
-                    {{tweet}}
+                    {{tweet.name}}
      		    </div>
             </div>
     	</custom-marker>
-    	</ng-map>
+    </ng-map>
+    
 
     <div class="list-group" id="tweetList">
         <div ng-repeat="tweet in trends track by $index">

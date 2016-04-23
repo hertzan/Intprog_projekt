@@ -91,13 +91,11 @@ body {
 	
 }
 
-#map {
+.map {
 	float: right;
 	width: 60%;
 	height: 700px;
 	margin-bottom: 5%;
-	//margin-right: 20px;
-	//min-width: 400px;
 }
 
 #hashtagsList {
@@ -136,7 +134,7 @@ body {
 		width: 100%;
 		clear: both;
 	}
-	#map {
+	.map {
 		width: 100%;
 		clear: both;
 	}

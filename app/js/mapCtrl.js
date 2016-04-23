@@ -17,9 +17,7 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 	// triggers once the place has changed on search auto complete,
 	// sets the current place in the map and in factory
 	$scope.placeChanged = function() {
-		
 		myMap.place = this.getPlace();
-
 		myMap.map.setCenter(myMap.place.geometry.location);
 	}
 
@@ -35,13 +33,15 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 				// only plot markers for those not currently in bounds
 				if(currentCities.indexOf(citiesInBounds[i]) == -1){
 					// TODO plotta för stad som ej syns
-					//plotStuff(currentCities[i]);
+					plotStuff(citiesInBounds[i]);
+					//console.log(currentCities[i]);
 					console.log("plotting for: " + citiesInBounds[i].name);
 				}
 			}
 			// update the current cities with those in bounds
 			currentCities = citiesInBounds;
-			
+			//console.log("currentCities: ");
+			//console.log(currentCities);
 
 			lat = center.lat();
 			long = center.lng();
@@ -49,20 +49,38 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 		}
 	}
 
-	$scope.placeTweetOnMap = function() {
-
-	}
+	var plotArray = new Array();
 
 	function plotStuff(city) {
+		console.log("City: ");
+		console.log(city);
 		lat = city.latitude;
 		long = city.longitude;
-		var plotArray = new Array();
 
-		recursiveGetCalls(5, plotArray, null);
-		$scope.tweetsWithPos = getHashtags(plotArray);
+		//för snabba för tillfället...
+		plotHelp(plotArray);
+		plotArray = getHashtags(plotArray);
 
+		//myMap.map.customMarkers.foo.setPosition(lat, long);
 	}
 
+	function getPlotCoordinates(city, array) {
+		var plotCoordinates = new Array();
+		var plotlat = city.latitude;
+		var plotlong = city.longitude;
+		for(var i=0;i<array.length;i++) {
+			plotCoordinates.push([array[i], plotlat, plotlong]);
+			//ingen aning vad detta kommer plotta men man måste testa något hehe...
+			if(i % 2 == 0){
+				plotlat + 1;
+				plotlong - 0.5;
+			} else {
+				plotlong + 1;
+				plotlat - 0.5;
+			}
+		}
+		return plotCoordinates;
+	}
 
 
 	// returns an array of the 20 most common hashtags from an array of full tweet texts.
@@ -132,8 +150,8 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 			});
 		}
 		if(index == 10) {
-			return array;
-		}
+				return array;
+			}
 	}
 
 	// function for finding the minimum ID (the oldest tweet) in an array of tweets
