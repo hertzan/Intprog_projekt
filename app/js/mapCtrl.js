@@ -66,7 +66,7 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 		//myMap.map.customMarkers.foo.setPosition(lat, long);
 	}
 
-	
+
 	var plotCoordinates = new Array();
 
 	function getPlotCoordinates(city) {
@@ -74,20 +74,23 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 		var retreivedArray = new Array();
 		var plotlat = city.latitude;
 		var plotlong = city.longitude;
+		var latlng = new google.maps.LatLng(59.3293235,18.0685808); //stockholm
+		var radius = 2000; //meters
+		var circle = new google.maps.Circle({center: latlng, radius: radius});
+		var defaultBounds = circle.getBounds();
+		console.log("circle: ");
+		console.log(defaultBounds);
 
-		factory.getSearchTweets("#", '"'+plotlat+', '+plotlong+', 20km"',"15", null).then(function(foundTweets) {
+		factory.getSearchTweets("#", '"'+plotlat+', '+plotlong+', 20km"',"40", null).then(function(foundTweets) {
 			retreivedArray = foundTweets.statuses;
 
 			for(var i=0;i<retreivedArray.length;i++) {
-				plotCoordinates.push({hash:[retreivedArray[i].entities.hashtags[0]], pos:[plotlat,plotlong]});
-				//ingen aning vad detta kommer plotta men man måste testa något hehe...
-				if(i % 2 == 0){
-					plotlat + 1;
-					plotlong - 0.5;
-				} else {
-					plotlong + 1;
-					plotlat - 0.5;
+				if (retreivedArray[i].entities.hashtags[0] != undefined) {
+					plotCoordinates.push({hash:[retreivedArray[i].entities.hashtags[0]], pos:[plotlat,plotlong]});
 				}
+					//plotlat = Math.random() * defaultBounds.R.R;
+					//plotlong = defaultBounds.j.R
+				
 			}
 			console.log("plotCoordinates: ");
 			console.log(plotCoordinates);
