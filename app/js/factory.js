@@ -16,7 +16,7 @@ tweetmapApp.factory('factory',function ($resource, $q, $rootScope) {
 	cb.setConsumerKey("d5Oubu1R7RDMo7XTPHV9mZ2Wd", "0mdfxc87pFUEl6TRLNgdugIckVAUxQBx0rRd585TZ92Vy2ue91");
 	cb.setBearerToken("AAAAAAAAAAAAAAAAAAAAADaCuQAAAAAACtY1FqEArZxMhbxMZog97YStjAc%3DB7FK42VBTIZzRGT5HzSX8lBwdCSU4xjjYhBjgtgYbkV88RcD1c");
 
-	// read the json file for cities names and locations
+	// read the json file for city names and locations
 	function readCities(){
 		$.ajax({
 			url: "\cities.json",
@@ -129,24 +129,6 @@ tweetmapApp.factory('factory',function ($resource, $q, $rootScope) {
 		);
 		return deffered.promise;
 	}
-
-
-	this.setHashtag = function(data) {
-		savedHash = data;
-		console.log("savedHash: " + savedHash);
- 	}
- 	this.setPosition = function(data) {
-		savedPos = data;
-		console.log("savedPos: " + savedPos);
- 	}
-
- 	this.getHashtag = function() {
-  		return savedHash;
- 	}
-
- 	this.getPosition = function() {
-  		return savedPos;
- 	}
 
   // Angular service needs to return an object that has all the
   // methods created in it

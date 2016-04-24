@@ -1,14 +1,18 @@
 tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 	var myMap = this;
 	var bounds;
-	var center;	
-	var lat = 59.3293235;
-	var long = 18.0685808;
+	var zoom;
 	var currentCities = new Array();
+	var currentPlots = new Array();
 
 	updateTrends();
 
-	
+	// set maximum and minimum zoom levels
+	$scope.$on('mapInitialized', function(evt, evtMap) {
+	        map = evtMap;
+        	map.setOptions({maxZoom:10, minZoom: 6});
+	});	
+
 
 	$scope.goToSearchPage = function(hashtag) {
 		factory.setHashtag(hashtag.word);
@@ -20,6 +24,7 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 	// sets the current place in the map and in factory
 	$scope.placeChanged = function() {
 		myMap.place = this.getPlace();
+
 		myMap.map.setCenter(myMap.place.geometry.location);
 	}
 
@@ -27,77 +32,104 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 	// updates information about the current place
 	function updatePlace() {
 		if(myMap.map != undefined) {
+			// update map information
+			var zoomChanged = (zoom != myMap.map.getZoom());
+			zoom = myMap.map.getZoom();
 			bounds =  myMap.map.getBounds();
-			center = myMap.map.getCenter();
 			
 			// update the current showing cities
 			var citiesInBounds = factory.citiesInBounds(bounds);
-			for(var i = 0;i<citiesInBounds.length;i++){
-				// only plot markers for those not currently in bounds
-				if(currentCities.indexOf(citiesInBounds[i]) == -1){
-					// TODO plotta för stad som ej syns
-					if(foundCities.indexOf(citiesInBounds[i]) == -1){
-						getPlotCoordinates(citiesInBounds[i]);
-						foundCities.push(citiesInBounds[i]);
+
+			// remove all cities no longer in bounds
+			var index = -1;
+			for(var i = 0;i<currentCities.length;i++){
+				if(citiesInBounds.indexOf(currentCities[i]) == -1){
+					for(var j =0;j<currentPlots.length;j++){
+						if(currentCities[i].name == currentPlots[j].city.name){
+							index = j;
+						}
 					}
+					currentPlots.splice(index,1);
+					console.log("removing city no longer in bounds: " + currentCities[i].name);
 				}
 			}
+			
+			// add new cities in bounds
+			for(var i = 0;i<citiesInBounds.length;i++){
+				if(currentCities.indexOf(citiesInBounds[i]) == -1){
+					console.log("adding new city in bounds: " + citiesInBounds[i].name);
+					getPlotCoordinates(citiesInBounds[i]);
+				}
+			}
+			
+			// draw all plots on the map
+			drawPlots();
 			// update the current cities with those in bounds
 			currentCities = citiesInBounds;
-
-			lat = center.lat();
-			long = center.lng();
-
 		}
 	}
 
-	var plotArray = new Array();
-
-	function plotStuff(city) {
-		console.log("City: ");
-		console.log(city);
-		lat = city.latitude;
-		long = city.longitude;
-
-		//för snabba för tillfället...
-		plotHelp(plotArray);
-		plotArray = getHashtags(plotArray);
-
-		//myMap.map.customMarkers.foo.setPosition(lat, long);
+	// draws all custom markers within variable currentPlots
+	function drawPlots(){
+		if(currentPlots.length != 0){
+			var temp = new Array();
+			// go through all plots for all cities
+			for(var i =0;i<currentPlots.length;i++){
+				for(var j =0;j<currentPlots[i].plots.length;j++){
+					temp.push(currentPlots[i].plots[j]);
+				}
+				
+			}
+			$scope.tweetsWithPos = temp;
+		}
 	}
 
 
-	var plotCoordinates = new Array();
 
+
+	// finds tweets for parameter city and sets the markers on the map
 	function getPlotCoordinates(city) {
-		
+		var plotCoordinates = new Array();
 		var retreivedArray = new Array();
 		var plotlat = city.latitude;
 		var plotlong = city.longitude;
-		//var latlng = new google.maps.LatLng(59.3293235,18.0685808); //stockholm
-		//var radius = 2000; //meters
-		//var circle = new google.maps.Circle({center: latlng, radius: radius});
-		//var defaultBounds = circle.getBounds();
-		//console.log("circle: ");
-		//console.log(defaultBounds);
 
-		factory.getSearchTweets("#", '"'+plotlat+', '+plotlong+', 20km"',"40", null).then(function(foundTweets) {
+		factory.getSearchTweets("#", '"'+plotlat+', '+plotlong+', 20km"',"100", null).then(function(foundTweets) {
+			plotCoordinates.length=0;
 			retreivedArray = foundTweets.statuses;
+			// find the most common tags and mentions
+			retreivedArray = getHashtags(retreivedArray);
 
+			// create array with coordinates
 			for(var i=0;i<retreivedArray.length;i++) {
-				if (retreivedArray[i].entities.hashtags[0] != undefined) {
-					plotCoordinates.push({hash:[retreivedArray[i].entities.hashtags[0]], pos:[plotlat,plotlong]});
-				}
-					//plotlat = Math.random() * defaultBounds.R.R;
-					//plotlong = defaultBounds.j.R
-				
+				plotCoordinates.push({hash:retreivedArray[i], pos:[plotlat,plotlong]});
 			}
-			console.log("plotCoordinates: ");
-			console.log(plotCoordinates);
-			$scope.tweetsWithPos = plotCoordinates;
+			plotCoordinates = scatterCoordinates(plotCoordinates, [plotlat, plotlong]);
+			if(plotCoordinates.length>10){
+				plotCoordinates = plotCoordinates.splice(0,10); // only add max 10 per city
+			}
+			currentPlots.push({city, plots:plotCoordinates});
 		});
 	}
 
+	// takes in an array of tweets with coordinates and returns a new array with
+	// coordinates scattered randomly in a circle around parameter fromCoordinate
+	// based on current map zoom level
+	function scatterCoordinates(plots, fromCoordinate){
+		var radius = zoom/100;
+		for(var i =0;i<plots.length;i++){
+
+			// generate random x and y offsets
+			x = Math.random() * 2 * radius - radius;
+			ylim = Math.sqrt(radius * radius - x * x);
+			y = Math.random() * 2 * ylim - ylim;
+
+			plots[i].pos[0] = fromCoordinate[0] +x;
+			plots[i].pos[1] = fromCoordinate[1] +y;
+		}
+		return plots;
+
+	}
 
 	// returns an array of the 20 most common hashtags from an array of full tweet texts.
 	function getHashtags(tweets){
@@ -114,29 +146,27 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 
 		var words = new Array();
 
-		// empty all but hashtags and @
+		// empty all but hashtags
 		for(var i = 0; i < tweetString.length; i++){
-			if(tweetString[i].length > 2 && !tweetString[i].endsWith(":") && (tweetString[i].startsWith("#") ||tweetString[i].startsWith("@"))){
+			if(tweetString[i].startsWith("#") ){
 				words.push(tweetString[i]);
 			}
 		}
-		return factory.sortByFrequency(words).slice(0,19); // send back top 20 results
+		return factory.sortByFrequency(words); // send back results
 	}
 
 	// updates the trends list on the side
 	function updateTrends(){
 		//var words = getHashtags(tweets);
 		factory.getTrends().then(function(foundTweets) {
-			console.log("updating trends:");
-			console.log(foundTweets);
 			trendsArr = foundTweets.trends;
 
+			// show only top 20 results
 			$scope.trends=foundTweets[0].trends.slice(0,19);
 
 			// wait for 5 mins and update again
 			setTimeout(updateTrends, 300000);		
 		});
-		//$scope.tweets = words;		
 	}
 
 	// triggers when the map is idle, i.e no movement in either
@@ -144,11 +174,9 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 	$scope.onIdle = function() {
 
 		updatePlace();
-
-		//var recursiveArray = new Array();
-		//recursiveGetCalls(0, recursiveArray, null);
 	}
 
+/*
 	// recursive function for making 10 independent get Search/Tweet calls, appending
 	// the total array of results.
 	function recursiveGetCalls(index, latitude, longitude, array, max_id){
@@ -179,6 +207,8 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 		}
 		return min_id;
 	}
+*/
+
 
 	NgMap.getMap().then(function(map) {
 		myMap.map = map;

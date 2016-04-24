@@ -16,6 +16,13 @@ tweetmap.factory('tweetmap',function ($resource,$cookieStore) {
 
 
 
+  // ---------------------------------Lab 4 starts here!-------------------------------------
+
+  // API key for BigOven data.
+  //var apiKey = "sV1fPGQKrO0b6oUYb6w9kLI8BORLiWox";
+  //this.DishSearch = $resource('http://api.bigoven.com/recipes',{pg:1,rpp:25,api_key:apiKey});
+  //this.Dish = $resource('http://api.bigoven.com/recipe/:id',{api_key:apiKey}); 
+
   var getDish = this.Dish.get;
   var getDishPrice = this.getDishPrice;
 
