@@ -5,7 +5,7 @@ tweetmapApp.controller('SearchCtrl', function ($scope, $routeParams,factory) {
 	$scope.isLoading = 1;
 	var list = new Array();
 
-	var query = factory.getHashtag();
+	var query = $routeParams.query;
 
 	factory.getSearchTweets(query, null, 15).then(function(foundTweets) {
 		for (var i = 0; i < foundTweets.statuses.length; i++) {

@@ -149,7 +149,6 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 	function updateTrends(){
 		//var words = getHashtags(tweets);
 		factory.getTrends().then(function(foundTweets) {
-			trendsArr = foundTweets.trends;
 
 			// show only top 20 results
 			$scope.trends=foundTweets[0].trends.slice(0,19);

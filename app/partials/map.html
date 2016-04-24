@@ -22,7 +22,7 @@
     <div class="list-group" id="tweetList">
         <div ng-repeat="tweet in trends track by $index">
 
-            <a href="#/search/{{tweet.name}}" class="list-group-item">{{tweet.name}}</a>
+            <a href="#/search/{{tweet.query}}" class="list-group-item">{{tweet.name}}</a>
         </div>
     </div>
 </div>

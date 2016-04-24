@@ -43,14 +43,12 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 						}
 					}
 					currentPlots.splice(index,1);
-					console.log("removing city no longer in bounds: " + currentCities[i].name);
 				}
 			}
 			
 			// add new cities in bounds
 			for(var i = 0;i<citiesInBounds.length;i++){
 				if(currentCities.indexOf(citiesInBounds[i]) == -1){
-					console.log("adding new city in bounds: " + citiesInBounds[i].name);
 					getPlotCoordinates(citiesInBounds[i]);
 				}
 			}
@@ -64,7 +62,6 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 
 	// draws all custom markers within variable currentPlots
 	function drawPlots(){
-		console.log("inside drawplots");
 		if(currentPlots.length != 0){
 			var temp = new Array();
 			// go through all plots for all cities
@@ -150,9 +147,19 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 
 	// updates the trends list on the side
 	function updateTrends(){
+		var temp = new Array();
 		//var words = getHashtags(tweets);
 		factory.getTrends().then(function(foundTweets) {
-			trendsArr = foundTweets.trends;
+			trendsArr = foundTweets[0].trends.slice(0,19);
+			console.log(trendsArr);
+/*
+			for(var i =0;i<trendsArr.length;i++){
+				if(trendsArr[i].startsWith("#"){
+					temp.push(trendsArr[i].name.splice(0,1));
+				}
+				temp.push({name:trendsArr[i].name
+			}
+*/
 
 			// show only top 20 results
 			$scope.trends=foundTweets[0].trends.slice(0,19);

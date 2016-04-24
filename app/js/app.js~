@@ -8,7 +8,11 @@ tweetmapApp.config(['$routeProvider',
       when('/home', {
         templateUrl: 'partials/home.html'
       }).
-      when('/search', {
+      when('/search/:query', {
+        templateUrl: 'partials/search.html',
+        controller: 'SearchCtrl'
+      }).
+      when('/search/#:query', {
         templateUrl: 'partials/search.html',
         controller: 'SearchCtrl'
       }).
