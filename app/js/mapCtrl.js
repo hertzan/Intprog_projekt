@@ -23,23 +23,23 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 		myMap.map.setCenter(myMap.place.geometry.location);
 	}
 
+	var foundCities = new Array();
 	// updates information about the current place
 	function updatePlace() {
 		if(myMap.map != undefined) {
 			bounds =  myMap.map.getBounds();
 			center = myMap.map.getCenter();
-
+			
 			// update the current showing cities
 			var citiesInBounds = factory.citiesInBounds(bounds);
 			for(var i = 0;i<citiesInBounds.length;i++){
 				// only plot markers for those not currently in bounds
 				if(currentCities.indexOf(citiesInBounds[i]) == -1){
 					// TODO plotta för stad som ej syns
-					//plotStuff(citiesInBounds[i]);
-					console.log("currentCities before: ");
-					console.log(citiesInBounds[i]);
-					console.log("plotting for: " + citiesInBounds[i].name);
-					getPlotCoordinates(citiesInBounds[i]);
+					if(foundCities.indexOf(citiesInBounds[i]) == -1){
+						getPlotCoordinates(citiesInBounds[i]);
+						foundCities.push(citiesInBounds[i]);
+					}
 				}
 			}
 			// update the current cities with those in bounds
@@ -74,12 +74,12 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 		var retreivedArray = new Array();
 		var plotlat = city.latitude;
 		var plotlong = city.longitude;
-		var latlng = new google.maps.LatLng(59.3293235,18.0685808); //stockholm
-		var radius = 2000; //meters
-		var circle = new google.maps.Circle({center: latlng, radius: radius});
-		var defaultBounds = circle.getBounds();
-		console.log("circle: ");
-		console.log(defaultBounds);
+		//var latlng = new google.maps.LatLng(59.3293235,18.0685808); //stockholm
+		//var radius = 2000; //meters
+		//var circle = new google.maps.Circle({center: latlng, radius: radius});
+		//var defaultBounds = circle.getBounds();
+		//console.log("circle: ");
+		//console.log(defaultBounds);
 
 		factory.getSearchTweets("#", '"'+plotlat+', '+plotlong+', 20km"',"40", null).then(function(foundTweets) {
 			retreivedArray = foundTweets.statuses;
