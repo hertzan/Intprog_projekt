@@ -8,7 +8,6 @@ body {
 .mapContainer {
 	margin-right: 10%;
 	margin-left: 10%;
-	//margin-top: 5%;
 }
 
 .start {
@@ -123,6 +122,10 @@ body {
 	color: #4099FF;
 	font-weight:bold;
 }
+#hashtagsList .list-group-item {
+	color: black;
+	font-weight: normal;
+}
 
 #worldtrending {
 	float:left;
@@ -131,6 +134,14 @@ body {
 	width: 30%;
 	background: rgb(0,0,0);
 	background: rgba(0,0,0,0.5);
+}
+
+.loadingimg {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 5%;
+	height: 5%;
 }
 
 @media screen and (max-width: 768px) {
@@ -159,6 +170,13 @@ body {
 	#startButton {
 		margin-top:10%;
 	}
+	#hashtagsList {
+		width:80%;
+		color:black;
+		margin-right: 10%;
+		margin-left: 10%;
+	}
+
 }
 
 

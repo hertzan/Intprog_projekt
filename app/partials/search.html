@@ -1,6 +1,7 @@
 
 <h2 style=text-align:center;color:white; >{{status}}</h2>
-<div class="mid" ng-show="isLoading==1" id="loading-image"> <img src="http://www.arabianbusiness.com/skins/ab.main/gfx/loading_spinner.gif"> </img></div>
+
+<div class="mid" ng-show="isLoading==1" id="loading-image"> <img class="loadingimg" src="http://www.arabianbusiness.com/skins/ab.main/gfx/loading_spinner.gif"> </img></div>
 
 <div class="list-group" id="hashtagsList">
     <div ng-repeat="tweet in list | unique: 'tweet.id' ">
