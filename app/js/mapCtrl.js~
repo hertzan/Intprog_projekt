@@ -13,13 +13,6 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
         	map.setOptions({maxZoom:10, minZoom: 6});
 	});	
 
-
-	$scope.goToSearchPage = function(hashtag) {
-		factory.setHashtag(hashtag.word);
-		factory.setPosition(hashtag.pos);
-		console.log("pos: " + hashtag.pos)
-	}
-
 	// triggers once the place has changed on search auto complete,
 	// sets the current place in the map and in factory
 	$scope.placeChanged = function() {
@@ -71,22 +64,19 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 
 	// draws all custom markers within variable currentPlots
 	function drawPlots(){
+		console.log("inside drawplots");
 		if(currentPlots.length != 0){
 			var temp = new Array();
+			// go through all plots for all cities
 			for(var i =0;i<currentPlots.length;i++){
 				for(var j =0;j<currentPlots[i].plots.length;j++){
 					temp.push(currentPlots[i].plots[j]);
 				}
 				
 			}
-			console.log("currentplots array: ");
-			console.log(currentPlots);
-			console.log("temp array length:");
-			console.log(temp.length);
 			$scope.tweetsWithPos = temp;
 		}
 	}
-
 
 
 

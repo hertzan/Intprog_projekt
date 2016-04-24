@@ -13,13 +13,6 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
         	map.setOptions({maxZoom:10, minZoom: 6});
 	});	
 
-
-	$scope.goToSearchPage = function(hashtag) {
-		factory.setHashtag(hashtag.word);
-		factory.setPosition(hashtag.pos);
-		console.log("pos: " + hashtag.pos)
-	}
-
 	// triggers once the place has changed on search auto complete,
 	// sets the current place in the map and in factory
 	$scope.placeChanged = function() {
@@ -50,14 +43,12 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 						}
 					}
 					currentPlots.splice(index,1);
-					console.log("removing city no longer in bounds: " + currentCities[i].name);
 				}
 			}
 			
 			// add new cities in bounds
 			for(var i = 0;i<citiesInBounds.length;i++){
 				if(currentCities.indexOf(citiesInBounds[i]) == -1){
-					console.log("adding new city in bounds: " + citiesInBounds[i].name);
 					getPlotCoordinates(citiesInBounds[i]);
 				}
 			}
@@ -83,7 +74,6 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 			$scope.tweetsWithPos = temp;
 		}
 	}
-
 
 
 
