@@ -120,7 +120,7 @@ tweetmapApp.factory('factory',function ($resource, $q, $rootScope) {
 		var deffered = $q.defer();
 		cb.__call(
 			"trends_place",
-			"id=1",
+			"id=23424954",
 			function (reply) {
 		        	if (reply === undefined) {
 					console.log("error : ");

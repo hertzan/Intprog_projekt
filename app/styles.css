@@ -107,6 +107,7 @@ body {
 	background-color: #4099FF;
 	border-radius: 5px; 
 	box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.50);
+	position: relative;
 }
 .Tweet:hover {
 	z-index: 9999; 
