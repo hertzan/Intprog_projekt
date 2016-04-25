@@ -100,14 +100,16 @@ body {
 	font-size: 15px;
 	font-weight: bold;
 	color: white;
-	padding: 5px;
 	display: inline;
 	border: solid 1px;
 	border-color: #4099FF;
 	background-color: #4099FF;
 	border-radius: 5px; 
-	box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.50);
+	box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.90);
 	position: relative;
+}
+.Tweet a{
+	color:white;
 }
 .Tweet:hover {
 	z-index: 9999; 
