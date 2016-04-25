@@ -8,13 +8,13 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 
 	NgMap.getMap().then(function(map) {
 		myMap.map = map;
-
+		updateTrends();
   		var cities = factory.getCities();
 		for(var i=0;i<cities.length;i++){
 			getPlotCoordinates(cities[i]);
 		}
 		updatePlace();
-		updateTrends();
+
 	});
 
 	// set maximum and minimum zoom levels
