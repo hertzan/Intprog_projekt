@@ -5,7 +5,15 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 	var currentCities = new Array();
 	var currentPlots = new Array();
 
+
+	NgMap.getMap().then(function(map) {
+		myMap.map = map;
+		console.log(myMap.map);
+		updatePlace(myMap.map);
+	});
+
 	updateTrends();
+
 
 	// set maximum and minimum zoom levels
 	$scope.$on('mapInitialized', function(evt, evtMap) {
@@ -19,11 +27,12 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 		myMap.place = this.getPlace();
 
 		myMap.map.setCenter(myMap.place.geometry.location);
+		updatePlace(map);
 	}
 
 	var foundCities = new Array();
 	// updates information about the current place
-	function updatePlace() {
+	function updatePlace(map) {
 		if(myMap.map != undefined) {
 			// update map information
 			var zoomChanged = (zoom != myMap.map.getZoom());
@@ -83,6 +92,8 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 		var retreivedArray = new Array();
 		var plotlat = city.latitude;
 		var plotlong = city.longitude;
+		var str = "";
+		var str2 = "";
 
 		factory.getSearchTweets("#", '"'+plotlat+', '+plotlong+', 20km"',"100", null).then(function(foundTweets) {
 			plotCoordinates.length=0;
@@ -92,7 +103,9 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 
 			// create array with coordinates
 			for(var i=0;i<retreivedArray.length;i++) {
-				plotCoordinates.push({hash:retreivedArray[i], pos:[plotlat,plotlong]});
+				str = retreivedArray[i];
+				str2 = str.replace('#', '%23');
+				plotCoordinates.push({hash:retreivedArray[i], pos:[plotlat,plotlong], query:str2});
 			}
 			plotCoordinates = scatterCoordinates(plotCoordinates, [plotlat, plotlong]);
 			if(plotCoordinates.length>10){
@@ -162,44 +175,7 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 	// place nor zoom
 	$scope.onIdle = function() {
 
-		updatePlace();
+		updatePlace(myMap.map);
 	}
 
-/*
-	// recursive function for making 10 independent get Search/Tweet calls, appending
-	// the total array of results.
-	function recursiveGetCalls(index, latitude, longitude, array, max_id){
-		if(index < 10){
-			// make the API call and update trends list and map markers
-			factory.getSearchTweets("#", '"'+latitude+', '+longitude+', 10km"',"100", max_id).then(function(foundTweets) {
-				array = array.concat(foundTweets.statuses);
-
-				// search for a new max id
-				max_id = findMinID(foundTweets.statuses);
-
-				console.log("finished call no: " + index);
-
-				// do next call with updated index, array, and max_id
-				recursiveGetCalls(index+1, latitude, longitude, array, max_id);
-			});
-		}
-		if(index == 10) {
-				return array;
-			}
-	}
-
-	// function for finding the minimum ID (the oldest tweet) in an array of tweets
-	function findMinID(tweets){
-		var min_id = tweets[0].id;
-		for(var i=0;i<tweets.length;i++){
-			min_id = Math.min(min_id, tweets[i].id);
-		}
-		return min_id;
-	}
-*/
-
-
-	NgMap.getMap().then(function(map) {
-		myMap.map = map;
-	});
 });
