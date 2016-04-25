@@ -119,7 +119,7 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 	// coordinates scattered randomly in a circle around parameter fromCoordinate
 	// based on current map zoom level
 	function scatterCoordinates(plots, fromCoordinate){
-		var radius = zoom/100;
+		var radius = zoom/80;
 		for(var i =0;i<plots.length;i++){
 
 			// generate random x and y offsets
