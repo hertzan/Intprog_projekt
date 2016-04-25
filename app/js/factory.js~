@@ -27,6 +27,10 @@ tweetmapApp.factory('factory',function ($resource, $q, $rootScope) {
 		});
 	}
 
+	this.getCities = function(){
+		return cities;
+	}
+
 	// returns an array of all cities within the parameter bounds.
 	// returns an empty array if no cities are within the bounds.
 	this.citiesInBounds = function(bounds){
@@ -88,13 +92,14 @@ tweetmapApp.factory('factory',function ($resource, $q, $rootScope) {
 	// count = number of items to show per page
 	this.getSearchTweets = function (query, geocode, count, max_id) {
 		var deffered = $q.defer();
-		if(geocode == null){
+		if(geocode == null && max_id == null){
 			var params = {q:query, count:count};
 		} else if (max_id == null){
 			var params = {q:query, geocode:geocode,count:count};
-		} else {
+		} else{
 			var params = {q:query, geocode:geocode,count:count, max_id:max_id};
 		}
+		console.log(params);
 		cb.__call(
 			"search_tweets",
 			params,

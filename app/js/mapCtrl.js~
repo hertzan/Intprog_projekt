@@ -8,13 +8,13 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 
 	NgMap.getMap().then(function(map) {
 		myMap.map = map;
-
+		updateTrends();
   		var cities = factory.getCities();
 		for(var i=0;i<cities.length;i++){
 			getPlotCoordinates(cities[i]);
 		}
 		updatePlace();
-		updateTrends();
+
 	});
 
 	// set maximum and minimum zoom levels
@@ -90,6 +90,7 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 			var temp = new Array();
 			// go through all plots for all cities
 			for(var i =0;i<currentPlots.length;i++){
+				// check if it is in bounds
 				if(currentPlots[i].inBounds){
 					for(var j =0;j<currentPlots[i].plots.length;j++){
 						temp.push(currentPlots[i].plots[j]);
@@ -104,6 +105,7 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 
 	// finds tweets for parameter city and sets the markers on the map
 	function getPlotCoordinates(city) {
+
 		var plotCoordinates = new Array();
 		var retreivedArray = new Array();
 		var plotlat = city.latitude;
@@ -135,7 +137,8 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 	// coordinates scattered randomly in a circle around parameter fromCoordinate
 	// based on current map zoom level
 	function scatterCoordinates(plots, fromCoordinate){
-		var radius = zoom/100;
+		console.log("calling scatter");
+		var radius = zoom/80;
 		for(var i =0;i<plots.length;i++){
 
 			// generate random x and y offsets

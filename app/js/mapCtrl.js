@@ -8,16 +8,13 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 
 	NgMap.getMap().then(function(map) {
 		myMap.map = map;
-		$( document ).ajaxStop(function() {
-  			console.log("ajax");
-		});
-
+		updateTrends();
   		var cities = factory.getCities();
 		for(var i=0;i<cities.length;i++){
 			getPlotCoordinates(cities[i]);
 		}
 		updatePlace();
-		updateTrends();
+
 	});
 
 	// set maximum and minimum zoom levels
@@ -108,6 +105,7 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 
 	// finds tweets for parameter city and sets the markers on the map
 	function getPlotCoordinates(city) {
+
 		var plotCoordinates = new Array();
 		var retreivedArray = new Array();
 		var plotlat = city.latitude;
