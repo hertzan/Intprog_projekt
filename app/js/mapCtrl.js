@@ -8,12 +8,14 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 
 	NgMap.getMap().then(function(map) {
 		myMap.map = map;
-		console.log(myMap.map);
-		updatePlace(myMap.map);
+
+  		var cities = factory.getCities();
+		for(var i=0;i<cities.length;i++){
+			getPlotCoordinates(cities[i]);
+		}
+		updatePlace();
+		updateTrends();
 	});
-
-	updateTrends();
-
 
 	// set maximum and minimum zoom levels
 	$scope.$on('mapInitialized', function(evt, evtMap) {
@@ -27,12 +29,11 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 		myMap.place = this.getPlace();
 
 		myMap.map.setCenter(myMap.place.geometry.location);
-		updatePlace(map);
 	}
 
 	var foundCities = new Array();
 	// updates information about the current place
-	function updatePlace(map) {
+	function updatePlace() {
 		if(myMap.map != undefined) {
 			// update map information
 			var zoomChanged = (zoom != myMap.map.getZoom());
@@ -46,19 +47,14 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 			var index = -1;
 			for(var i = 0;i<currentCities.length;i++){
 				if(citiesInBounds.indexOf(currentCities[i]) == -1){
-					for(var j =0;j<currentPlots.length;j++){
-						if(currentCities[i].name == currentPlots[j].city.name){
-							index = j;
-						}
-					}
-					currentPlots.splice(index,1);
+					removeFromCurrentPlots(currentCities[i]);
 				}
 			}
 			
 			// add new cities in bounds
 			for(var i = 0;i<citiesInBounds.length;i++){
 				if(currentCities.indexOf(citiesInBounds[i]) == -1){
-					getPlotCoordinates(citiesInBounds[i]);
+					addToCurrentPlots(citiesInBounds[i]);
 				}
 			}
 			
@@ -69,16 +65,37 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 		}
 	}
 
+	// sets the inBounds variable for parameter city to true
+	function addToCurrentPlots(city){
+		for(var j =0;j<currentPlots.length;j++){
+			if(city.name == currentPlots[j].city.name){
+				currentPlots[j].inBounds = true;
+			}
+		}
+	}
+
+	// sets the inBounds variable for parameter city to false
+	function removeFromCurrentPlots(city){
+
+		for(var j =0;j<currentPlots.length;j++){
+			if(city.name == currentPlots[j].city.name){
+				currentPlots[j].inBounds = false;
+			}
+		}
+	}
+
 	// draws all custom markers within variable currentPlots
 	function drawPlots(){
 		if(currentPlots.length != 0){
 			var temp = new Array();
 			// go through all plots for all cities
 			for(var i =0;i<currentPlots.length;i++){
-				for(var j =0;j<currentPlots[i].plots.length;j++){
-					temp.push(currentPlots[i].plots[j]);
+				// check if it is in bounds
+				if(currentPlots[i].inBounds){
+					for(var j =0;j<currentPlots[i].plots.length;j++){
+						temp.push(currentPlots[i].plots[j]);
+					}
 				}
-				
 			}
 			$scope.tweetsWithPos = temp;
 		}
@@ -111,7 +128,7 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 			if(plotCoordinates.length>10){
 				plotCoordinates = plotCoordinates.splice(0,10); // only add max 10 per city
 			}
-			currentPlots.push({city, plots:plotCoordinates});
+			currentPlots.push({city, plots:plotCoordinates, inBounds:false});
 		});
 	}
 
@@ -174,8 +191,9 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 	// triggers when the map is idle, i.e no movement in either
 	// place nor zoom
 	$scope.onIdle = function() {
-
-		updatePlace(myMap.map);
+		if(myMap.map != undefined){
+			updatePlace(myMap.map);
+		}
 	}
 
 });

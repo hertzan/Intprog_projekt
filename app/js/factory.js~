@@ -129,31 +129,7 @@ tweetmapApp.factory('factory',function ($resource, $q, $rootScope) {
 		);
 		return deffered.promise;
 	}
-/*
-	this.setHashtag = function(data) {
- 		savedHash = data;
- 		console.log("savedHash: " + savedHash);
- 	}
-  	this.setPosition = function(data) {
- 		savedPos = data;
- 		console.log("savedPos: " + savedPos);
-  	}
-  
- 	this.set = function(data) {
- 		savedData = data;
- 		console.log("savedData: " + savedData);
-	}
-  	this.getHashtag = function() {
-   		return savedHash;
-   	}
-  
-  	this.get = function() {
-   		return savedData;
-	}
-  	this.getPosition = function() {
-   		return savedPos;
-   	}
-*/
+
   // Angular service needs to return an object that has all the
   // methods created in it
   return this;
