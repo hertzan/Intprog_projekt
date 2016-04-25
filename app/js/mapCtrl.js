@@ -16,7 +16,7 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 	// set maximum and minimum zoom levels
 	$scope.$on('mapInitialized', function(evt, evtMap) {
 	        map = evtMap;
-        	map.setOptions({maxZoom:12, minZoom: 5});
+        	map.setOptions({maxZoom:12, minZoom: 4});
 	});	
 
 	// triggers once the place has changed on search auto complete,
@@ -32,7 +32,6 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 	function updatePlace() {
 		if(myMap.map != undefined) {
 			// update map information
-			var zoomChanged = (zoom != myMap.map.getZoom());
 			zoom = myMap.map.getZoom();
 			bounds =  myMap.map.getBounds();
 			
@@ -93,7 +92,9 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 			for(var i =0;i<currentPlots.length;i++){
 				// check if it is in bounds
 				if(currentPlots[i].inBounds){
-					for(var j =0;j<currentPlots[i].plots.length;j++){
+					// vary number of results based on current zoom level
+					var index = Math.min(zoom-1,currentPlots[i].plots.length);
+					for(var j =0;j<index;j++){
 						temp.push(currentPlots[i].plots[j]);
 					}
 				}
@@ -124,7 +125,7 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 			for(var i=0;i<retreivedArray.length;i++) {
 				str = retreivedArray[i];
 				str2 = str.replace('#', '%23');
-				if(retreivedArray[i].length < 20){
+				if(retreivedArray[i].length < 15){
 					plotCoordinates.push({hash:retreivedArray[i], pos:[plotlat,plotlong], query:str2});
 				}
 			}
