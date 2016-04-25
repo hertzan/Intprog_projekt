@@ -17,7 +17,7 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 	// set maximum and minimum zoom levels
 	$scope.$on('mapInitialized', function(evt, evtMap) {
 	        map = evtMap;
-        	map.setOptions({maxZoom:12, minZoom: 4});
+        	map.setOptions({maxZoom:12, minZoom: 5});
 	});	
 
 	// triggers once the place has changed on search auto complete,
@@ -30,13 +30,25 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 
 	$scope.updateTrendPlace = function(woeid) {
 		updateTrends(woeid);
+		var fullOpacity = 1;
+		var halfOpacity = 0;
 		if(woeid == 23424954) {
 			$scope.headText = "Trending in Sweden";
+			$scope.sweStyle = 1;
+			$scope.usStyle = 1;
+			$scope.globeStyle = 1;
 		} else if(woeid == 23424977){
 			$scope.headText = "Trending in the USA";
+			$scope.sweStyle = 0;
+			$scope.usStyle = 0;
+			$scope.globeStyle = 1;
 		} else {
 			$scope.headText = "Trending in the world";
+			$scope.sweStyle = 0;
+			$scope.usStyle = 1;
+			$scope.globeStyle = 0;
 		}
+
 	}
 
 	var foundCities = new Array();
@@ -44,6 +56,7 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 	function updatePlace() {
 		if(myMap.map != undefined) {
 			// update map information
+			var zoomChanged = (zoom != myMap.map.getZoom());
 			zoom = myMap.map.getZoom();
 			bounds =  myMap.map.getBounds();
 			
@@ -104,9 +117,7 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 			for(var i =0;i<currentPlots.length;i++){
 				// check if it is in bounds
 				if(currentPlots[i].inBounds){
-					// vary number of results based on current zoom level
-					var index = Math.min(zoom-1,currentPlots[i].plots.length);
-					for(var j =0;j<index;j++){
+					for(var j =0;j<currentPlots[i].plots.length;j++){
 						temp.push(currentPlots[i].plots[j]);
 					}
 				}

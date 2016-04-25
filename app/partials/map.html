@@ -18,9 +18,9 @@
     </div>
 
     <div id="changeTrending">
-        <img id="wi" src="/images/worldimg.png" ng-click="updateTrendPlace(1)">
-        <img id="us" src="/images/usaimg.png" ng-click="updateTrendPlace(23424977)">
-        <img id="swe" src="/images/sweimg.png" ng-click="updateTrendPlace(23424954)">
+        <span ng-style="{'opacity' : sweStyle == 0 ? 1 : 0.5}"><img id="swe" src="/images/sweden.png" ng-click="updateTrendPlace(23424954)"></span>
+        <span ng-style="{'opacity' : usStyle == 0 ? 0.5 : 1}"><img id="us" src="/images/usa.png" ng-click="updateTrendPlace(23424977)"></span>
+        <span ng-style="{'opacity' : globeStyle == 0 ? 0.5 : 1}"><img id="wi" src="/images/globe.png" ng-click="updateTrendPlace(1)"></span>
     </div>
 
     <div class="list-group" id="tweetList">
