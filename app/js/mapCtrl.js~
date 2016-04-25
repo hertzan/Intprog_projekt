@@ -9,7 +9,6 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 	NgMap.getMap().then(function(map) {
 		myMap.map = map;
 		updateTrends();
-  		var cities = factory.getCities();
 		updatePlace();
 
 	});
@@ -17,7 +16,7 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 	// set maximum and minimum zoom levels
 	$scope.$on('mapInitialized', function(evt, evtMap) {
 	        map = evtMap;
-        	map.setOptions({maxZoom:10, minZoom: 6});
+        	map.setOptions({maxZoom:12, minZoom: 6});
 	});	
 
 	// triggers once the place has changed on search auto complete,
@@ -125,7 +124,9 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 			for(var i=0;i<retreivedArray.length;i++) {
 				str = retreivedArray[i];
 				str2 = str.replace('#', '%23');
-				plotCoordinates.push({hash:retreivedArray[i], pos:[plotlat,plotlong], query:str2});
+				if(retreivedArray[i].length < 20){
+					plotCoordinates.push({hash:retreivedArray[i], pos:[plotlat,plotlong], query:str2});
+				}
 			}
 			plotCoordinates = scatterCoordinates(plotCoordinates, [plotlat, plotlong]);
 			if(plotCoordinates.length>10){
@@ -141,7 +142,7 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 	// coordinates scattered randomly in a circle around parameter fromCoordinate
 	// based on current map zoom level
 	function scatterCoordinates(plots, fromCoordinate){
-		var radius = zoom/80;
+		var radius = zoom/250;
 		for(var i =0;i<plots.length;i++){
 
 			// generate random x and y offsets

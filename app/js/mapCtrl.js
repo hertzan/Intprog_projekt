@@ -16,7 +16,7 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 	// set maximum and minimum zoom levels
 	$scope.$on('mapInitialized', function(evt, evtMap) {
 	        map = evtMap;
-        	map.setOptions({maxZoom:12, minZoom: 6});
+        	map.setOptions({maxZoom:12, minZoom: 5});
 	});	
 
 	// triggers once the place has changed on search auto complete,
