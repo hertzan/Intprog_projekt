@@ -4,26 +4,41 @@ tweetmapApp.controller('SearchCtrl', function ($scope, $routeParams,factory) {
 	$scope.status = "Loading tweets...";
 	$scope.isLoading = 1;
 	var list = new Array();
+	var max_id =0;
 
 	var query = $routeParams.query;
 	console.log(query);
 
 	factory.getSearchTweets(query, null, 15).then(function(foundTweets) {
+		if(foundTweets.statuses.length == 0){
+			list.push({text:"No tweets found :("});
+		}
 		for (var i = 0; i < foundTweets.statuses.length; i++) {
 			list.push(foundTweets.statuses[i]);
 		}
+
+		max_id = list[0].id;
+		findMaxID(list);
 		$scope.status = "Found Tweets!";
 		$scope.isLoading = 0;
 		$scope.list = list;
 	});
 
 	$(window).scroll(function () {
-   	if ($(window).scrollTop() >= $(document).height() - $(window).height() - 10) {
-    	factory.getSearchTweets(query, null, 15).then(function(foundTweets) {
-		for (var i = 0; i < foundTweets.statuses.length; i++) {
-			list.push(foundTweets.statuses[i]);
+   		if ($(window).scrollTop() >= $(document).height() - $(window).height() - 10) {
+    			factory.getSearchTweets(query, null, 15, max_id).then(function(foundTweets) {
+				for (var i = 0; i < foundTweets.statuses.length; i++) {
+					list.push(foundTweets.statuses[i]);
+				}
+				findMaxID(list);
+			});
 		}
 	});
-   }
-});
+	
+	// finds a new lowest max ID from an array of full tweets
+	function findMaxID(tweets){
+		for(var i=0;i<tweets.length;i++){
+			max_id = Math.min(max_id, tweets[i].id);
+		}
+	}
 });

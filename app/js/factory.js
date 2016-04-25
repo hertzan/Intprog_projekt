@@ -92,11 +92,11 @@ tweetmapApp.factory('factory',function ($resource, $q, $rootScope) {
 	// count = number of items to show per page
 	this.getSearchTweets = function (query, geocode, count, max_id) {
 		var deffered = $q.defer();
-		if(geocode == null){
+		if(geocode == null && max_id == null){
 			var params = {q:query, count:count};
 		} else if (max_id == null){
 			var params = {q:query, geocode:geocode,count:count};
-		} else {
+		} else{
 			var params = {q:query, geocode:geocode,count:count, max_id:max_id};
 		}
 		cb.__call(

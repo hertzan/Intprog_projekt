@@ -105,6 +105,7 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 
 	// finds tweets for parameter city and sets the markers on the map
 	function getPlotCoordinates(city) {
+
 		var plotCoordinates = new Array();
 		var retreivedArray = new Array();
 		var plotlat = city.latitude;
