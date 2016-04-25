@@ -19,7 +19,6 @@ tweetmapApp.controller('SearchCtrl', function ($scope, $routeParams,factory) {
 
 		max_id = list[0].id;
 		findMaxID(list);
-		console.log("new max id: " + max_id);
 		$scope.status = "Found Tweets!";
 		$scope.isLoading = 0;
 		$scope.list = list;
