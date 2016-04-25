@@ -27,6 +27,10 @@ tweetmapApp.factory('factory',function ($resource, $q, $rootScope) {
 		});
 	}
 
+	this.getCities = function(){
+		return cities;
+	}
+
 	// returns an array of all cities within the parameter bounds.
 	// returns an empty array if no cities are within the bounds.
 	this.citiesInBounds = function(bounds){
