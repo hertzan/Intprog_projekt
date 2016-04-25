@@ -30,8 +30,6 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 
 	$scope.updateTrendPlace = function(woeid) {
 		updateTrends(woeid);
-		var fullOpacity = 1;
-		var halfOpacity = 0;
 		if(woeid == 23424954) {
 			$scope.headText = "Trending in Sweden";
 			$scope.sweStyle = 1;
@@ -166,7 +164,7 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 	// coordinates scattered randomly in a circle around parameter fromCoordinate
 	// based on current map zoom level
 	function scatterCoordinates(plots, fromCoordinate){
-		var radius = zoom/50;
+		var radius = zoom/90;
 		
 		for(var i =0;i<plots.length;i++){
 
