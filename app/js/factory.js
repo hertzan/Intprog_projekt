@@ -116,11 +116,11 @@ tweetmapApp.factory('factory',function ($resource, $q, $rootScope) {
 	}
 
 	// returns worldwide trends for sidebar.
-	this.getTrends = function () {
+	this.getTrends = function (woeid) {
 		var deffered = $q.defer();
 		cb.__call(
 			"trends_place",
-			"id=23424954",
+			"id="+woeid,
 			function (reply) {
 		        	if (reply === undefined) {
 					console.log("error : ");

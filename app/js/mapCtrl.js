@@ -4,11 +4,12 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 	var zoom;
 	var currentCities = new Array();
 	var currentPlots = new Array();
+	$scope.headText = "Trending in Sweden";
 
 
 	NgMap.getMap().then(function(map) {
 		myMap.map = map;
-		updateTrends();
+		updateTrends(23424954);
 		updatePlace();
 
 	});
@@ -25,6 +26,17 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 		myMap.place = this.getPlace();
 
 		myMap.map.setCenter(myMap.place.geometry.location);
+	}
+
+	$scope.updateTrendPlace = function(woeid) {
+		updateTrends(woeid);
+		if(woeid == 23424954) {
+			$scope.headText = "Trending in Sweden";
+		} else if(woeid == 23424977){
+			$scope.headText = "Trending in the USA";
+		} else {
+			$scope.headText = "Trending in the world";
+		}
 	}
 
 	var foundCities = new Array();
@@ -124,7 +136,7 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 			for(var i=0;i<retreivedArray.length;i++) {
 				str = retreivedArray[i];
 				str2 = str.replace('#', '%23');
-				if(retreivedArray[i].length < 20){
+				if(retreivedArray[i].length < 15){
 					plotCoordinates.push({hash:retreivedArray[i], pos:[plotlat,plotlong], query:str2});
 				}
 			}
@@ -142,7 +154,8 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 	// coordinates scattered randomly in a circle around parameter fromCoordinate
 	// based on current map zoom level
 	function scatterCoordinates(plots, fromCoordinate){
-		var radius = zoom/250;
+		var radius = zoom/50;
+		
 		for(var i =0;i<plots.length;i++){
 
 			// generate random x and y offsets
@@ -181,16 +194,16 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 		return factory.sortByFrequency(words); // send back results
 	}
 
+
+
 	// updates the trends list on the side
-	function updateTrends(){
+	function updateTrends(woeid){
 		//var words = getHashtags(tweets);
-		factory.getTrends().then(function(foundTweets) {
+		factory.getTrends(woeid).then(function(foundTweets) {
 
 			// show only top 20 results
 			$scope.trends=foundTweets[0].trends.slice(0,19);
 
-			// wait for 5 mins and update again
-			setTimeout(updateTrends, 300000);		
 		});
 	}
 

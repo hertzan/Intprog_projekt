@@ -114,6 +114,30 @@ body {
 .Tweet:hover {
 	z-index: 9999; 
 }
+#changeTrending {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    left: 36.5%;
+    top: 31%;
+}
+
+/* resize images */
+#us{
+    width: 100%;
+    height: auto;
+    padding: 3px;
+}
+#wi{
+    width: 100%;
+    height: auto;
+    padding: 3px;
+}
+#swe{
+    width: 100%;
+    height: auto;
+    padding: 3px;
+}
 
 .topnav {
 	text-align: left;

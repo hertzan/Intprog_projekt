@@ -14,7 +14,13 @@
     </ng-map>
     
     <div id="worldtrending">
-        <h3>Trending in sweden</h3>
+        <h3>{{headText}}</h3>
+    </div>
+
+    <div id="changeTrending">
+        <img id="wi" src="/images/worldimg.png" ng-click="updateTrendPlace(1)">
+        <img id="us" src="/images/usaimg.png" ng-click="updateTrendPlace(23424977)">
+        <img id="swe" src="/images/sweimg.png" ng-click="updateTrendPlace(23424954)">
     </div>
 
     <div class="list-group" id="tweetList">
