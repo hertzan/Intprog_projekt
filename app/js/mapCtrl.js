@@ -123,7 +123,9 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 			for(var i=0;i<retreivedArray.length;i++) {
 				str = retreivedArray[i];
 				str2 = str.replace('#', '%23');
-				plotCoordinates.push({hash:retreivedArray[i], pos:[plotlat,plotlong], query:str2});
+				if(retreivedArray[i].length < 20){
+					plotCoordinates.push({hash:retreivedArray[i], pos:[plotlat,plotlong], query:str2});
+				}
 			}
 			plotCoordinates = scatterCoordinates(plotCoordinates, [plotlat, plotlong]);
 			if(plotCoordinates.length>10){
