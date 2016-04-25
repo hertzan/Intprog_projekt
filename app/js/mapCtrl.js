@@ -9,10 +9,6 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 	NgMap.getMap().then(function(map) {
 		myMap.map = map;
 		updateTrends();
-  		var cities = factory.getCities();
-		for(var i=0;i<cities.length;i++){
-			getPlotCoordinates(cities[i]);
-		}
 		updatePlace();
 
 	});
@@ -67,16 +63,21 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 
 	// sets the inBounds variable for parameter city to true
 	function addToCurrentPlots(city){
+		var exists = false;
 		for(var j =0;j<currentPlots.length;j++){
 			if(city.name == currentPlots[j].city.name){
 				currentPlots[j].inBounds = true;
+				exists = true;
 			}
+		}
+
+		if(!exists){
+			getPlotCoordinates(city);
 		}
 	}
 
 	// sets the inBounds variable for parameter city to false
 	function removeFromCurrentPlots(city){
-
 		for(var j =0;j<currentPlots.length;j++){
 			if(city.name == currentPlots[j].city.name){
 				currentPlots[j].inBounds = false;
@@ -129,7 +130,9 @@ tweetmapApp.controller('MapCtrl', function ($scope, factory, NgMap) {
 			if(plotCoordinates.length>10){
 				plotCoordinates = plotCoordinates.splice(0,10); // only add max 10 per city
 			}
-			currentPlots.push({city, plots:plotCoordinates, inBounds:false});
+			currentPlots.push({city, plots:plotCoordinates, inBounds:true});
+
+			drawPlots();
 		});
 	}
 

@@ -38,7 +38,7 @@ tweetmapApp.factory('factory',function ($resource, $q, $rootScope) {
 		var latLng;
 		var citiesArray = new Array();
 		for(var i=0;i<cities.length;i++){
-			latLng = new google.maps.LatLng(cities[i].latitude, cities[i].longitude); 
+			latLng = new google.maps.LatLng(cities[i].latitude, cities[i].longitude);
 			if(bounds.contains(latLng)){
 				citiesArray.push(cities[i]);
 			}

@@ -38,7 +38,9 @@ tweetmapApp.factory('factory',function ($resource, $q, $rootScope) {
 		var latLng;
 		var citiesArray = new Array();
 		for(var i=0;i<cities.length;i++){
-			latLng = new google.maps.LatLng(cities[i].latitude, cities[i].longitude); 
+			latLng = new google.maps.LatLng(cities[i].latitude, cities[i].longitude);
+			console.log("inside factory, city: " + cities[i].name);
+			console.log(cities[i].latitude + " " + cities[i].longitude);
 			if(bounds.contains(latLng)){
 				citiesArray.push(cities[i]);
 			}
@@ -99,7 +101,6 @@ tweetmapApp.factory('factory',function ($resource, $q, $rootScope) {
 		} else{
 			var params = {q:query, geocode:geocode,count:count, max_id:max_id};
 		}
-		console.log(params);
 		cb.__call(
 			"search_tweets",
 			params,

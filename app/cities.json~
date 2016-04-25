@@ -10,6 +10,11 @@
     "longitude": 11.97456
   },
   {
+    "name": "Norrköping",
+    "latitude": 58.587745,
+    "longitude": 16.192421
+  },
+  {
     "name": "Helsingborg",
     "latitude": 56.046467,
     "longitude": 12.694512
@@ -58,5 +63,1205 @@
     "name": "Växjö",
     "latitude": 56.879004,
     "longitude": 14.805852
+  },
+  {
+    "name": "Kabul",
+    "latitude": "34,53",
+    "longitude": "69,17"
+  },
+  {
+    "name": "Tirana",
+    "latitude": "41,33",
+    "longitude": "19,82"
+  },
+  {
+    "name": "Algiers",
+    "latitude": "36,75",
+    "longitude": "3,04"
+  },
+  {
+    "name": "Pago Pago",
+    "latitude": "-14,28",
+    "longitude": "-170,70"
+  },
+  {
+    "name": "Andorra la Vella",
+    "latitude": "42,51",
+    "longitude": "1,52"
+  },
+  {
+    "name": "Luanda",
+    "latitude": "-8,84",
+    "longitude": "13,23"
+  },
+  {
+    "name": "The Valley",
+    "latitude": "18,22",
+    "longitude": "-63,06"
+  },
+  {
+    "name": "St. John's",
+    "latitude": "17,12",
+    "longitude": "-61,85"
+  },
+  {
+    "name": "Buenos Aires",
+    "latitude": "-34,61",
+    "longitude": "-58,38"
+  },
+  {
+    "name": "Yerevan",
+    "latitude": "40,18",
+    "longitude": "44,51"
+  },
+  {
+    "name": "Oranjestad",
+    "latitude": "12,52",
+    "longitude": "-70,03"
+  },
+  {
+    "name": "Canberra",
+    "latitude": "-35,28",
+    "longitude": "149,13"
+  },
+  {
+    "name": "Vienna",
+    "latitude": "48,21",
+    "longitude": "16,37"
+  },
+  {
+    "name": "Baku",
+    "latitude": "40,38",
+    "longitude": "49,89"
+  },
+  {
+    "name": "Nassau",
+    "latitude": "25,06",
+    "longitude": "-77,34"
+  },
+  {
+    "name": "Manama",
+    "latitude": "26,22",
+    "longitude": "50,58"
+  },
+  {
+    "name": "Dhaka",
+    "latitude": "23,71",
+    "longitude": "90,41"
+  },
+  {
+    "name": "Bridgetown",
+    "latitude": "13,10",
+    "longitude": "-59,62"
+  },
+  {
+    "name": "Minsk",
+    "latitude": "53,90",
+    "longitude": "27,57"
+  },
+  {
+    "name": "Brussels",
+    "latitude": "50,85",
+    "longitude": "4,35"
+  },
+  {
+    "name": "Belmopan",
+    "latitude": "17,25",
+    "longitude": "-88,77"
+  },
+  {
+    "name": "Porto-Novo",
+    "latitude": "6,50",
+    "longitude": "2,60"
+  },
+  {
+    "name": "Hamilton",
+    "latitude": "32,29",
+    "longitude": "-64,78"
+  },
+  {
+    "name": "Thimphu",
+    "latitude": "27,47",
+    "longitude": "89,64"
+  },
+  {
+    "name": "Sucre",
+    "latitude": "-19,03",
+    "longitude": "-65,26"
+  },
+  {
+    "name": "Sarajevo",
+    "latitude": "43,85",
+    "longitude": "18,36"
+  },
+  {
+    "name": "Gaborone",
+    "latitude": "-24,65",
+    "longitude": "25,91"
+  },
+  {
+    "name": "Brasília",
+    "latitude": "-15,78",
+    "longitude": "-47,93"
+  },
+  {
+    "name": "Diego Garcia",
+    "latitude": "72,46",
+    "longitude": "7,24"
+  },
+  {
+    "name": "Road Town",
+    "latitude": "18,42",
+    "longitude": "-64,62"
+  },
+  {
+    "name": "Bandar Seri Begawan",
+    "latitude": "4,94",
+    "longitude": "114,95"
+  },
+  {
+    "name": "Sofia",
+    "latitude": "42,70",
+    "longitude": "23,32"
+  },
+  {
+    "name": "Ouagadougou",
+    "latitude": "12,37",
+    "longitude": "-1,53"
+  },
+  {
+    "name": "Bujumbura",
+    "latitude": "-3,38",
+    "longitude": "29,36"
+  },
+  {
+    "name": "Phnom Penh",
+    "latitude": "11,56",
+    "longitude": "104,92"
+  },
+  {
+    "name": "Yaoundé",
+    "latitude": "3,87",
+    "longitude": "11,52"
+  },
+  {
+    "name": "Ottawa",
+    "latitude": "45,41",
+    "longitude": "-75,70"
+  },
+  {
+    "name": "Praia",
+    "latitude": "14,93",
+    "longitude": "-23,51"
+  },
+  {
+    "name": "George Town",
+    "latitude": "19,29",
+    "longitude": "-81,37"
+  },
+  {
+    "name": "Bangui",
+    "latitude": "4,36",
+    "longitude": "18,55"
+  },
+  {
+    "name": "N'Djamena",
+    "latitude": "12,11",
+    "longitude": "15,04"
+  },
+  {
+    "name": "Santiago",
+    "latitude": "-33,46",
+    "longitude": "-70,65"
+  },
+  {
+    "name": "Beijing",
+    "latitude": "39,91",
+    "longitude": "116,40"
+  },
+  {
+    "name": "The Settlement",
+    "latitude": "-10,42",
+    "longitude": "105,68"
+  },
+  {
+    "name": "West Island",
+    "latitude": "-12,16",
+    "longitude": "96,82"
+  },
+  {
+    "name": "Bogotá",
+    "latitude": "4,61",
+    "longitude": "-74,08"
+  },
+  {
+    "name": "Moroni",
+    "latitude": "-11,70",
+    "longitude": "43,26"
+  },
+  {
+    "name": "Avarua",
+    "latitude": "-21,21",
+    "longitude": "-159,78"
+  },
+  {
+    "name": "San José",
+    "latitude": "9,93",
+    "longitude": "-84,08"
+  },
+  {
+    "name": "Zagreb",
+    "latitude": "45,81",
+    "longitude": "15,98"
+  },
+  {
+    "name": "Havana",
+    "latitude": "23,13",
+    "longitude": "-82,38"
+  },
+  {
+    "name": "Nicosia",
+    "latitude": "35,17",
+    "longitude": "33,37"
+  },
+  {
+    "name": "Prague",
+    "latitude": "50,09",
+    "longitude": "14,42"
+  },
+  {
+    "name": "Kinshasa",
+    "latitude": "-4,32",
+    "longitude": "15,31"
+  },
+  {
+    "name": "Copenhagen",
+    "latitude": "55,68",
+    "longitude": "12,57"
+  },
+  {
+    "name": "Djibouti",
+    "latitude": "11,59",
+    "longitude": "43,15"
+  },
+  {
+    "name": "Roseau",
+    "latitude": "15,30",
+    "longitude": "-61,39"
+  },
+  {
+    "name": "Santo Domingo",
+    "latitude": "18,50",
+    "longitude": "-69,99"
+  },
+  {
+    "name": "Dili",
+    "latitude": "-8,56",
+    "longitude": "125,57"
+  },
+  {
+    "name": "Quito",
+    "latitude": "-0,23",
+    "longitude": "-78,52"
+  },
+  {
+    "name": "Cairo",
+    "latitude": "30,06",
+    "longitude": "31,25"
+  },
+  {
+    "name": "San Salvador",
+    "latitude": "13,69",
+    "longitude": "-89,19"
+  },
+  {
+    "name": "Malabo",
+    "latitude": "3,75",
+    "longitude": "8,78"
+  },
+  {
+    "name": "Asmara",
+    "latitude": "15,33",
+    "longitude": "38,93"
+  },
+  {
+    "name": "Tallinn",
+    "latitude": "59,44",
+    "longitude": "24,75"
+  },
+  {
+    "name": "Addis Ababa",
+    "latitude": "9,02",
+    "longitude": "38,75"
+  },
+  {
+    "name": "Stanley",
+    "latitude": "-51,70",
+    "longitude": "-57,85"
+  },
+  {
+    "name": "Tórshavn",
+    "latitude": "62,01",
+    "longitude": "-6,77"
+  },
+  {
+    "name": "Suva",
+    "latitude": "-18,14",
+    "longitude": "178,44"
+  },
+  {
+    "name": "Helsinki",
+    "latitude": "60,17",
+    "longitude": "24,94"
+  },
+  {
+    "name": "Paris",
+    "latitude": "48,85",
+    "longitude": "2,35"
+  },
+  {
+    "name": "Cayenne",
+    "latitude": "4,93",
+    "longitude": "-52,33"
+  },
+  {
+    "name": "Papeete",
+    "latitude": "-17,53",
+    "longitude": "-149,57"
+  },
+  {
+    "name": "Libreville",
+    "latitude": "0,39",
+    "longitude": "9,45"
+  },
+  {
+    "name": "Banjul",
+    "latitude": "13,45",
+    "longitude": "-16,58"
+  },
+  {
+    "name": "Tbilisi",
+    "latitude": "41,69",
+    "longitude": "44,83"
+  },
+  {
+    "name": "Berlin",
+    "latitude": "52,52",
+    "longitude": "13,41"
+  },
+  {
+    "name": "Accra",
+    "latitude": "5,56",
+    "longitude": "-0,20"
+  },
+  {
+    "name": "Gibraltar",
+    "latitude": "36,14",
+    "longitude": "-5,35"
+  },
+  {
+    "name": "Athens",
+    "latitude": "37,98",
+    "longitude": "23,72"
+  },
+  {
+    "name": "Nuuk (Godthåb)",
+    "latitude": "64,18",
+    "longitude": "-51,72"
+  },
+  {
+    "name": "St. George's",
+    "latitude": "12,06",
+    "longitude": "-61,75"
+  },
+  {
+    "name": "Basse-Terre",
+    "latitude": "16,00",
+    "longitude": "-61,73"
+  },
+  {
+    "name": "Hagåtña",
+    "latitude": "13,48",
+    "longitude": "144,75"
+  },
+  {
+    "name": "New Guatemala",
+    "latitude": "14,64",
+    "longitude": "-90,51"
+  },
+  {
+    "name": "St Peter Port",
+    "latitude": "49,46",
+    "longitude": "-2,54"
+  },
+  {
+    "name": "Conakry",
+    "latitude": "9,54",
+    "longitude": "-13,68"
+  },
+  {
+    "name": "Bissau",
+    "latitude": "11,86",
+    "longitude": "-15,60"
+  },
+  {
+    "name": "Georgetown",
+    "latitude": "6,80",
+    "longitude": "-58,16"
+  },
+  {
+    "name": "Port-au-Prince",
+    "latitude": "18,54",
+    "longitude": "-72,34"
+  },
+  {
+    "name": "Tegucigalpa",
+    "latitude": "14,08",
+    "longitude": "-87,21"
+  },
+  {
+    "name": "Hong Kong",
+    "latitude": "22,29",
+    "longitude": "114,16"
+  },
+  {
+    "name": "Budapest",
+    "latitude": "47,50",
+    "longitude": "19,04"
+  },
+  {
+    "name": "Reykjavík",
+    "latitude": "64,14",
+    "longitude": "-21,90"
+  },
+  {
+    "name": "New Delhi",
+    "latitude": "28,64",
+    "longitude": "77,22"
+  },
+  {
+    "name": "Jakarta",
+    "latitude": "-6,21",
+    "longitude": "106,85"
+  },
+  {
+    "name": "Tehran",
+    "latitude": "35,69",
+    "longitude": "51,42"
+  },
+  {
+    "name": "Baghdad",
+    "latitude": "33,34",
+    "longitude": "44,40"
+  },
+  {
+    "name": "Dublin",
+    "latitude": "53,33",
+    "longitude": "-6,25"
+  },
+  {
+    "name": "Douglas",
+    "latitude": "54,15",
+    "longitude": "-4,48"
+  },
+  {
+    "name": "Jerusalem",
+    "latitude": "35,23",
+    "longitude": "31,77"
+  },
+  {
+    "name": "Rome",
+    "latitude": "41,89",
+    "longitude": "12,48"
+  },
+  {
+    "name": "Yamoussoukro",
+    "latitude": "6,82",
+    "longitude": "-5,28"
+  },
+  {
+    "name": "Kingston",
+    "latitude": "18,00",
+    "longitude": "-76,79"
+  },
+  {
+    "name": "Edo",
+    "latitude": "35,69",
+    "longitude": "139,69"
+  },
+  {
+    "name": "Saint Helier",
+    "latitude": "49,19",
+    "longitude": "-2,10"
+  },
+  {
+    "name": "Amman",
+    "latitude": "31,96",
+    "longitude": "35,95"
+  },
+  {
+    "name": "Astana",
+    "latitude": "51,18",
+    "longitude": "71,45"
+  },
+  {
+    "name": "Nairobi",
+    "latitude": "-1,28",
+    "longitude": "36,82"
+  },
+  {
+    "name": "South Tarawa",
+    "latitude": "1,33",
+    "longitude": "172,98"
+  },
+  {
+    "name": "Pristina",
+    "latitude": "42,67",
+    "longitude": "21,17"
+  },
+  {
+    "name": "Kuwait City",
+    "latitude": "29,37",
+    "longitude": "47,98"
+  },
+  {
+    "name": "Bishkek",
+    "latitude": "42,87",
+    "longitude": "74,59"
+  },
+  {
+    "name": "Vientiane",
+    "latitude": "17,97",
+    "longitude": "102,60"
+  },
+  {
+    "name": "Riga",
+    "latitude": "56,95",
+    "longitude": "24,11"
+  },
+  {
+    "name": "Beirut",
+    "latitude": "33,89",
+    "longitude": "35,49"
+  },
+  {
+    "name": "Maseru",
+    "latitude": "-29,32",
+    "longitude": "27,48"
+  },
+  {
+    "name": "Monrovia",
+    "latitude": "6,30",
+    "longitude": "-10,80"
+  },
+  {
+    "name": "Tripoli",
+    "latitude": "32,88",
+    "longitude": "13,19"
+  },
+  {
+    "name": "Vaduz",
+    "latitude": "47,14",
+    "longitude": "9,52"
+  },
+  {
+    "name": "Vilnius",
+    "latitude": "54,69",
+    "longitude": "25,28"
+  },
+  {
+    "name": "Luxembourg",
+    "latitude": "49,61",
+    "longitude": "6,13"
+  },
+  {
+    "name": "Macao",
+    "latitude": "22,20",
+    "longitude": "113,55"
+  },
+  {
+    "name": "Skopje",
+    "latitude": "42,00",
+    "longitude": "21,43"
+  },
+  {
+    "name": "Antananarivo",
+    "latitude": "-18,91",
+    "longitude": "47,54"
+  },
+  {
+    "name": "Lilongwe",
+    "latitude": "-13,97",
+    "longitude": "33,79"
+  },
+  {
+    "name": "Kuala Lumpur",
+    "latitude": "3,14",
+    "longitude": "101,69"
+  },
+  {
+    "name": "Malé",
+    "latitude": "4,17",
+    "longitude": "73,51"
+  },
+  {
+    "name": "Bamako",
+    "latitude": "12,65",
+    "longitude": "-8,00"
+  },
+  {
+    "name": "Valletta",
+    "latitude": "35,90",
+    "longitude": "14,51"
+  },
+  {
+    "name": "Majuro",
+    "latitude": "7,09",
+    "longitude": "171,38"
+  },
+  {
+    "name": "Fort-de-France",
+    "latitude": "14,61",
+    "longitude": "-61,07"
+  },
+  {
+    "name": "Nouakchott",
+    "latitude": "18,09",
+    "longitude": "-15,98"
+  },
+  {
+    "name": "Port Louis",
+    "latitude": "-20,16",
+    "longitude": "57,50"
+  },
+  {
+    "name": "Mamoutzou",
+    "latitude": "-12,78",
+    "longitude": "45,23"
+  },
+  {
+    "name": "Mexico City",
+    "latitude": "19,43",
+    "longitude": "-99,13"
+  },
+  {
+    "name": "Palikir",
+    "latitude": "6,92",
+    "longitude": "158,16"
+  },
+  {
+    "name": "Chişinău",
+    "latitude": "47,01",
+    "longitude": "28,86"
+  },
+  {
+    "name": "Monaco",
+    "latitude": "43,73",
+    "longitude": "7,42"
+  },
+  {
+    "name": "Ulan Bator",
+    "latitude": "47,91",
+    "longitude": "106,88"
+  },
+  {
+    "name": "Podgorica",
+    "latitude": "42,44",
+    "longitude": "19,26"
+  },
+  {
+    "name": "Plymouth",
+    "latitude": "16,71",
+    "longitude": "-62,21"
+  },
+  {
+    "name": "Rabat",
+    "latitude": "34,01",
+    "longitude": "-6,83"
+  },
+  {
+    "name": "Maputo",
+    "latitude": "-25,97",
+    "longitude": "32,58"
+  },
+  {
+    "name": "Nay Pyi Taw",
+    "latitude": "19,75",
+    "longitude": "96,13"
+  },
+  {
+    "name": "Windhoek",
+    "latitude": "-22,56",
+    "longitude": "17,08"
+  },
+  {
+    "name": "Yaren",
+    "latitude": "166,93",
+    "longitude": "-0,54"
+  },
+  {
+    "name": "Kathmandu",
+    "latitude": "27,70",
+    "longitude": "85,32"
+  },
+  {
+    "name": "Amsterdam",
+    "latitude": "52,37",
+    "longitude": "4,89"
+  },
+  {
+    "name": "Willemstad",
+    "latitude": "-68,92",
+    "longitude": "12,10"
+  },
+  {
+    "name": "Noumea",
+    "latitude": "-22,28",
+    "longitude": "166,46"
+  },
+  {
+    "name": "Wellington",
+    "latitude": "-41,29",
+    "longitude": "174,78"
+  },
+  {
+    "name": "Managua",
+    "latitude": "12,13",
+    "longitude": "-86,25"
+  },
+  {
+    "name": "Niamey",
+    "latitude": "13,51",
+    "longitude": "2,11"
+  },
+  {
+    "name": "Abuja",
+    "latitude": "9,07",
+    "longitude": "7,48"
+  },
+  {
+    "name": "Alofi",
+    "latitude": "-19,06",
+    "longitude": "-169,92"
+  },
+  {
+    "name": "Kingston",
+    "latitude": "-29,05",
+    "longitude": "167,97"
+  },
+  {
+    "name": "Pyongyang",
+    "latitude": "39,03",
+    "longitude": "125,75"
+  },
+  {
+    "name": "Saipan",
+    "latitude": "15,21",
+    "longitude": "145,75"
+  },
+  {
+    "name": "Oslo",
+    "latitude": "59,91",
+    "longitude": "10,75"
+  },
+  {
+    "name": "Muscat",
+    "latitude": "23,61",
+    "longitude": "58,59"
+  },
+  {
+    "name": "Islamabad",
+    "latitude": "33,72",
+    "longitude": "73,04"
+  },
+  {
+    "name": "Melekeok",
+    "latitude": "7,50",
+    "longitude": "134,62"
+  },
+  {
+    "name": "East Jerusalem",
+    "latitude": "35,23",
+    "longitude": "31,77"
+  },
+  {
+    "name": "Panama City",
+    "latitude": "8,99",
+    "longitude": "-79,52"
+  },
+  {
+    "name": "Port Moresby",
+    "latitude": "-9,44",
+    "longitude": "147,18"
+  },
+  {
+    "name": "Asunción",
+    "latitude": "-25,30",
+    "longitude": "-57,64"
+  },
+  {
+    "name": "Lima",
+    "latitude": "-12,04",
+    "longitude": "-77,03"
+  },
+  {
+    "name": "Manila",
+    "latitude": "14,60",
+    "longitude": "120,98"
+  },
+  {
+    "name": "Adamstown",
+    "latitude": "-25,07",
+    "longitude": "-130,10"
+  },
+  {
+    "name": "Warsaw",
+    "latitude": "52,23",
+    "longitude": "21,01"
+  },
+  {
+    "name": "Lisbon",
+    "latitude": "38,72",
+    "longitude": "-9,13"
+  },
+  {
+    "name": "San Juan",
+    "latitude": "18,47",
+    "longitude": "-66,11"
+  },
+  {
+    "name": "Doha",
+    "latitude": "25,28",
+    "longitude": "51,52"
+  },
+  {
+    "name": "Brazzaville",
+    "latitude": "-4,27",
+    "longitude": "15,28"
+  },
+  {
+    "name": "Saint-Denis",
+    "latitude": "-20,88",
+    "longitude": "55,45"
+  },
+  {
+    "name": "Bucharest",
+    "latitude": "44,43",
+    "longitude": "26,11"
+  },
+  {
+    "name": "Moscow",
+    "latitude": "55,75",
+    "longitude": "37,62"
+  },
+  {
+    "name": "Kigali",
+    "latitude": "-1,95",
+    "longitude": "30,06"
+  },
+  {
+    "name": "Gustavia",
+    "latitude": "17,90",
+    "longitude": "-62,85"
+  },
+  {
+    "name": "Jamestown",
+    "latitude": "-15,94",
+    "longitude": "-5,72"
+  },
+  {
+    "name": "Basseterre",
+    "latitude": "17,29",
+    "longitude": "-62,73"
+  },
+  {
+    "name": "Castries",
+    "latitude": "14,00",
+    "longitude": "-61,01"
+  },
+  {
+    "name": "Marigot",
+    "latitude": "18,07",
+    "longitude": "-63,08"
+  },
+  {
+    "name": "Saint-Pierre",
+    "latitude": "46,78",
+    "longitude": "-56,17"
+  },
+  {
+    "name": "Kingstown",
+    "latitude": "13,16",
+    "longitude": "-61,22"
+  },
+  {
+    "name": "Apia",
+    "latitude": "-13,83",
+    "longitude": "-171,77"
+  },
+  {
+    "name": "San Marino",
+    "latitude": "43,94",
+    "longitude": "12,45"
+  },
+  {
+    "name": "São Tomé",
+    "latitude": "0,34",
+    "longitude": "6,73"
+  },
+  {
+    "name": "Riyadh",
+    "latitude": "24,69",
+    "longitude": "46,72"
+  },
+  {
+    "name": "Dakar",
+    "latitude": "14,69",
+    "longitude": "-17,44"
+  },
+  {
+    "name": "Belgrade",
+    "latitude": "44,80",
+    "longitude": "20,47"
+  },
+  {
+    "name": "Victoria",
+    "latitude": "-4,62",
+    "longitude": "55,45"
+  },
+  {
+    "name": "Freetown",
+    "latitude": "8,48",
+    "longitude": "-13,23"
+  },
+  {
+    "name": "Singapore",
+    "latitude": "1,29",
+    "longitude": "103,85"
+  },
+  {
+    "name": "Bratislava",
+    "latitude": "48,15",
+    "longitude": "17,11"
+  },
+  {
+    "name": "Ljubljana",
+    "latitude": "46,05",
+    "longitude": "14,51"
+  },
+  {
+    "name": "Honiara",
+    "latitude": "-9,43",
+    "longitude": "159,95"
+  },
+  {
+    "name": "Mogadishu",
+    "latitude": "2,04",
+    "longitude": "45,34"
+  },
+  {
+    "name": "Pretoria",
+    "latitude": "-25,74",
+    "longitude": "28,19"
+  },
+  {
+    "name": "Grytviken",
+    "latitude": "-54,28",
+    "longitude": "-36,51"
+  },
+  {
+    "name": "Seoul",
+    "latitude": "37,57",
+    "longitude": "126,98"
+  },
+  {
+    "name": "Madrid",
+    "latitude": "40,42",
+    "longitude": "-3,70"
+  },
+  {
+    "name": "Colombo",
+    "latitude": "6,93",
+    "longitude": "79,85"
+  },
+  {
+    "name": "Khartoum",
+    "latitude": "15,55",
+    "longitude": "32,53"
+  },
+  {
+    "name": "Paramaribo",
+    "latitude": "5,87",
+    "longitude": "-55,17"
+  },
+  {
+    "name": "Longyearbyen",
+    "latitude": "78,22",
+    "longitude": "15,64"
+  },
+  {
+    "name": "Mbabane",
+    "latitude": "-26,32",
+    "longitude": "31,13"
+  },
+  {
+    "name": "Berne",
+    "latitude": "46,95",
+    "longitude": "7,45"
+  },
+  {
+    "name": "Damascus",
+    "latitude": "33,51",
+    "longitude": "36,29"
+  },
+  {
+    "name": "Taipei",
+    "latitude": "25,05",
+    "longitude": "121,53"
+  },
+  {
+    "name": "Dushanbe",
+    "latitude": "38,54",
+    "longitude": "68,78"
+  },
+  {
+    "name": "Dodoma",
+    "latitude": "-6,17",
+    "longitude": "35,74"
+  },
+  {
+    "name": "Bangkok",
+    "latitude": "13,75",
+    "longitude": "100,50"
+  },
+  {
+    "name": "Lomé",
+    "latitude": "6,14",
+    "longitude": "1,21"
+  },
+  {
+    "name": "Nukunonu",
+    "latitude": "-171,85",
+    "longitude": "-9,20"
+  },
+  {
+    "name": "Nuku'alofa",
+    "latitude": "-21,13",
+    "longitude": "-175,20"
+  },
+  {
+    "name": "Port of Spain",
+    "latitude": "10,67",
+    "longitude": "-61,52"
+  },
+  {
+    "name": "Tunis",
+    "latitude": "36,82",
+    "longitude": "10,17"
+  },
+  {
+    "name": "Ankara",
+    "latitude": "39,92",
+    "longitude": "32,85"
+  },
+  {
+    "name": "Ashkhabad",
+    "latitude": "37,95",
+    "longitude": "58,38"
+  },
+  {
+    "name": "Cockburn Town",
+    "latitude": "21,46",
+    "longitude": "-71,14"
+  },
+  {
+    "name": "Funafuti",
+    "latitude": "-8,52",
+    "longitude": "179,19"
+  },
+  {
+    "name": "Charlotte Amalie",
+    "latitude": "18,34",
+    "longitude": "-64,93"
+  },
+  {
+    "name": "Kampala",
+    "latitude": "0,32",
+    "longitude": "32,58"
+  },
+  {
+    "name": "Kiev",
+    "latitude": "50,45",
+    "longitude": "30,52"
+  },
+  {
+    "name": "Abu Dhabi",
+    "latitude": "24,47",
+    "longitude": "54,37"
+  },
+  {
+    "name": "London",
+    "latitude": "51,51",
+    "longitude": "-0,13"
+  },
+  {
+    "name": "Washington",
+    "latitude": "38,90",
+    "longitude": "-77,04"
+  },
+  {
+    "name": "Montevideo",
+    "latitude": "-34,83",
+    "longitude": "-56,17"
+  },
+  {
+    "name": "Tashkent",
+    "latitude": "41,26",
+    "longitude": "69,22"
+  },
+  {
+    "name": "Port Vila",
+    "latitude": "-17,73",
+    "longitude": "168,32"
+  },
+  {
+    "name": "Vatican",
+    "latitude": "41,90",
+    "longitude": "12,45"
+  },
+  {
+    "name": "Caracas",
+    "latitude": "10,49",
+    "longitude": "-66,88"
+  },
+  {
+    "name": "Hanoi",
+    "latitude": "21,02",
+    "longitude": "105,84"
+  },
+  {
+    "name": "Mata-Utu",
+    "latitude": "-13,28",
+    "longitude": "-176,17"
+  },
+  {
+    "name": "El Aaiún",
+    "latitude": "27,16",
+    "longitude": "-13,20"
+  },
+  {
+    "name": "Sanaa",
+    "latitude": "15,35",
+    "longitude": "44,21"
+  },
+  {
+    "name": "Lusaka",
+    "latitude": "-15,41",
+    "longitude": "28,29"
+  },
+  {
+    "name": "Harare",
+    "latitude": "-17,83",
+    "longitude": "31,05"
   }
 ]
